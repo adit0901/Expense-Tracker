@@ -116,3 +116,23 @@ def test_cannot_reference_other_users_accounts_or_categories(
     assert r3.status_code == 422
     r4 = other_user.get("/api/v1/transactions", params={"account_id": theirs["id"]})
     assert r4.json()["data"] == []
+
+
+def test_reports_and_dashboard_only_count_own_data(
+    user: AuthedUser, other_user: AuthedUser
+) -> None:
+    from tests.factories import cat_id, create_account, make_txn
+
+    acct = create_account(user, "A-Bank")
+    make_txn(
+        user,
+        type="income",
+        account_id=acct["id"],
+        amount="5000.00",
+        category_id=cat_id(user, "Salary", "income"),
+        txn_date="2026-11-02",
+    )
+    p = {"period": "this_month", "as_of": "2026-11-15"}
+    for url in ("/api/v1/dashboard/overview", "/api/v1/reports/income"):
+        assert "5000.00" not in other_user.get(url, params=p).text
+    assert data(other_user.get("/api/v1/accounts/summary"))["liquid_funds"] == "0.00"

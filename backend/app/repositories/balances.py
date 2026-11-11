@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import uuid
 from collections.abc import Iterable, Mapping
+from datetime import date
 from decimal import Decimal
 from typing import Any
 
-from sqlalchemy import Numeric, case, func, literal, select, union_all
+from sqlalchemy import Numeric, and_, case, func, literal, select, union_all
 from sqlalchemy.orm import Session
 
 from app.models.account import Account
@@ -27,7 +28,10 @@ def _sign_case(table: Mapping[TransactionType, int]) -> Any:
 
 
 def account_balances(
-    db: Session, user_id: uuid.UUID, account_ids: Iterable[uuid.UUID] | None = None
+    db: Session,
+    user_id: uuid.UUID,
+    account_ids: Iterable[uuid.UUID] | None = None,
+    as_of: date | None = None,
 ) -> dict[uuid.UUID, Decimal]:
     """Current balance per account: opening + signed sum of posted txns on/after opening date."""
     posted = Transaction.status == TransactionStatus.posted
@@ -44,9 +48,10 @@ def account_balances(
     moves = union_all(source_side, counter_side).subquery()
 
     polarity = case((Account.type.in_(list(LIABILITY_ACCOUNT_TYPES)), -1), else_=1)
-    delta_sum = func.coalesce(
-        func.sum(moves.c.delta).filter(moves.c.d >= Account.opening_date), literal(0)
-    )
+    in_range = moves.c.d >= Account.opening_date
+    if as_of is not None:
+        in_range = and_(in_range, moves.c.d <= as_of)
+    delta_sum = func.coalesce(func.sum(moves.c.delta).filter(in_range), literal(0))
     stmt = (
         select(Account.id, (Account.opening_balance + polarity * delta_sum).cast(Numeric(19, 4)))
         .outerjoin(moves, moves.c.acct == Account.id)

@@ -77,14 +77,17 @@ _HTTP_CODES = {
 
 
 def error_body(
-    code: str, message: str, details: list[dict[str, Any]] | None = None
+    code: str,
+    message: str,
+    details: list[dict[str, Any]] | None = None,
+    request_id: str | None = None,
 ) -> dict[str, Any]:
     return {
         "error": {
             "code": code,
             "message": message,
             "details": details or [],
-            "request_id": get_request_id(),
+            "request_id": request_id or get_request_id(),
         }
     }
 
@@ -125,10 +128,14 @@ async def _http_handler(_: Request, exc: Exception) -> JSONResponse:
     return JSONResponse(error_body(code, message), status_code=exc.status_code, headers=exc.headers)
 
 
-async def _unhandled_handler(_: Request, exc: Exception) -> JSONResponse:
-    log.error("unhandled_exception", exc_type=type(exc).__name__)
+async def _unhandled_handler(request: Request, exc: Exception) -> JSONResponse:
+    request_id = getattr(request.state, "request_id", None)
+    log.error("unhandled_exception", exc_type=type(exc).__name__, request_id=request_id)
+    headers = {"X-Request-ID": request_id} if request_id else None
     return JSONResponse(
-        error_body("internal_error", "An unexpected error occurred"), status_code=500
+        error_body("internal_error", "An unexpected error occurred", request_id=request_id),
+        status_code=500,
+        headers=headers,
     )
 
 

@@ -64,6 +64,7 @@ def test_unhandled_error_hides_internals(client: TestClient) -> None:
     body = resp.json()
     assert body["error"]["code"] == "internal_error"
     assert "SELECT" not in resp.text and "Traceback" not in resp.text
+    assert body["error"]["request_id"] == resp.headers["X-Request-ID"]
 
 
 def test_unversioned_path_is_404(client: TestClient) -> None:

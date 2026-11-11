@@ -126,3 +126,24 @@ register_case(
         ],
     )
 )
+
+
+def _income_source(u: AuthedUser) -> str:
+    return str(
+        data(u.post("/api/v1/income-sources", json={"name": "Private Salary", "type": "salary"}))[
+            "id"
+        ]
+    )
+
+
+register_case(
+    OwnedCase(
+        name="income_source",
+        create=_income_source,
+        probes=[
+            Probe("GET", "/api/v1/income-sources/{id}"),
+            Probe("PATCH", "/api/v1/income-sources/{id}", json={"name": "Hijacked"}),
+        ],
+        list_path="/api/v1/income-sources?include_inactive=true",
+    )
+)

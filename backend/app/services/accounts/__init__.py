@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import uuid
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from decimal import Decimal
 
 from sqlalchemy import exists, or_, select
@@ -234,11 +234,13 @@ def require_active_account(
     return account
 
 
-def summary(db: Session, user_id: uuid.UUID) -> AccountsSummary:
-    accounts = list(
-        db.scalars(select(Account).where(Account.user_id == user_id, Account.archived_at.is_(None)))
-    )
-    balances = account_balances(db, user_id, [a.id for a in accounts])
+def summary(db: Session, user_id: uuid.UUID, as_of: date | None = None) -> AccountsSummary:
+    """Totals across non-archived accounts, optionally as of a date (end of day)."""
+    stmt = select(Account).where(Account.user_id == user_id, Account.archived_at.is_(None))
+    if as_of is not None:
+        stmt = stmt.where(Account.opening_date <= as_of)
+    accounts = list(db.scalars(stmt))
+    balances = account_balances(db, user_id, [a.id for a in accounts], as_of=as_of)
     totals: dict[AccountType, Decimal] = dict.fromkeys(AccountType, ZERO)
     for a in accounts:
         totals[a.type] += balances.get(a.id, a.opening_balance)

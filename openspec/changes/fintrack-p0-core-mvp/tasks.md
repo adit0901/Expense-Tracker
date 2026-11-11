@@ -54,18 +54,18 @@
 
 ## 6. Income management and calculations
 
-- [ ] 6.1 Implement income sources CRUD/deactivate; verify tests for multiple sources
-- [ ] 6.2 Implement salary breakdown validation (net = gross − deductions = credited amount); verify tests for valid breakdown and `salary_breakdown_mismatch`
-- [ ] 6.3 Implement `services/calculations` for period resolution (month, quarter, calendar year, FY, custom; Asia/Kolkata), monthly income, expenses net of refunds, savings, savings rate (null on zero income), category totals and shares; verify table-driven unit tests for every scenario in `financial-calculations` with ≥ 90% coverage
-- [ ] 6.4 Implement income report endpoint (monthly, per source, salary gross/deductions/net) and CSV export; verify integration test for the annual report scenario
-- [ ] 6.5 Write `docs/financial-calculations.md` with each formula and worked examples mirrored by tests; verify each example has a matching test id referenced in the doc
+- [x] 6.1 Implement income sources CRUD/deactivate; verify tests for multiple sources
+- [x] 6.2 Implement salary breakdown validation (net = gross − deductions = credited amount); verify tests for valid breakdown and `salary_breakdown_mismatch`
+- [x] 6.3 Implement `services/calculations` for period resolution (month, quarter, calendar year, FY, custom; Asia/Kolkata), monthly income, expenses net of refunds, savings, savings rate (null on zero income), category totals and shares; verify table-driven unit tests for every scenario in `financial-calculations` with ≥ 90% coverage
+- [x] 6.4 Implement income report endpoint (monthly, per source, salary gross/deductions/net) and CSV export; verify integration test for the annual report scenario
+- [x] 6.5 Write `docs/financial-calculations.md` with each formula and worked examples mirrored by tests; verify each example has a matching test id referenced in the doc
 
 ## 7. Dashboard and analytics APIs
 
-- [ ] 7.1 Implement `/dashboard/overview` (KPI tiles with previous-period change, "—" for zero base) ; verify tests for November vs October and zero-base change
-- [ ] 7.2 Implement `/dashboard/trends` (12 months incl. zero months, savings rate gaps) and `/dashboard/category-breakdown` (top 6 + other); verify tests for 18-month data and gap months
-- [ ] 7.3 Implement expense report by category and payment method, savings-trend report and CSV exports; verify payment-method totals sum to total expenses
-- [ ] 7.4 Verify dashboard and report endpoints return identical figures for the same period in an integration test
+- [x] 7.1 Implement `/dashboard/overview` (KPI tiles with previous-period change, "—" for zero base) ; verify tests for November vs October and zero-base change
+- [x] 7.2 Implement `/dashboard/trends` (12 months incl. zero months, savings rate gaps) and `/dashboard/category-breakdown` (top 6 + other); verify tests for 18-month data and gap months
+- [x] 7.3 Implement expense report by category and payment method, savings-trend report and CSV exports; verify payment-method totals sum to total expenses
+- [x] 7.4 Verify dashboard and report endpoints return identical figures for the same period in an integration test
 
 ## 8. Frontend shell and auth
 
