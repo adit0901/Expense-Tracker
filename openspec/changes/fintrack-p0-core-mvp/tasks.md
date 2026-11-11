@@ -90,8 +90,8 @@
 
 - [ ] 10.1 Write Playwright E2E: register → create account → add salary with breakdown and expenses → dashboard shows expected income, expenses, savings, savings rate; verify it passes against `docker compose`
 - [ ] 10.2 Write Playwright E2E for CSV import with a duplicate row and for password reset via the Mailpit API; verify both pass
-- [ ] 10.3 Run the full cross-tenant sweep, a log-redaction check over E2E logs (no amounts, descriptions or tokens), and the accessibility check (axe) on main pages; verify zero violations of severity serious or higher
-- [ ] 10.4 Complete README (setup, env vars, commands) and `docs/runbook.md`; verify a fresh clone reaches a working app by following the README only
+- [x] 10.3 Run the full cross-tenant sweep, a log-redaction check over E2E logs (no amounts, descriptions or tokens), and the accessibility check (axe) on main pages; verify zero violations of severity serious or higher
+- [x] 10.4 Complete README (setup, env vars, commands) and `docs/runbook.md`; verify a fresh clone reaches a working app by following the README only
 
 ## Workflow follow-up
 

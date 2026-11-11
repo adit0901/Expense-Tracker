@@ -9,7 +9,8 @@ import { expect, test } from '@playwright/test'
 
 import { PASSWORD } from './helpers'
 
-const LOG = resolve(process.cwd(), '../.local/e2e-backend.log')
+const LOG = [resolve(process.cwd(), '../.local/e2e-backend.log'), resolve(process.cwd(), '../.e2e-backend.log')]
+  .find((p) => existsSync(p)) ?? resolve(process.cwd(), '../.local/e2e-backend.log')
 
 test('backend logs contain no amounts, descriptions, passwords or tokens', () => {
   test.skip(!existsSync(LOG), 'backend log not captured (servers started externally)')
