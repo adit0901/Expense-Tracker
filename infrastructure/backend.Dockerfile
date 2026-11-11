@@ -9,4 +9,4 @@ RUN uv sync --frozen --no-dev && useradd --system --uid 10001 fintrack && mkdir 
 USER fintrack
 ENV PATH="/app/.venv/bin:$PATH" UPLOAD_DIR=/data/uploads
 EXPOSE 8000
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --no-access-log"]

@@ -22,7 +22,7 @@ services:
 
   backend:
     build: { context: ., dockerfile: infrastructure/backend.Dockerfile }
-    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --no-access-log"
     env_file: [.env.example]
     environment:
       DATABASE_URL: postgresql+psycopg://fintrack_app:fintrack_app@db:5432/fintrack

@@ -69,22 +69,22 @@
 
 ## 8. Frontend shell and auth
 
-- [ ] 8.1 Build design tokens (light/dark CSS variables), theme provider applied before first paint, and base shadcn components; verify a Vitest test that theme preference toggles the root class and a manual contrast check in both themes
-- [ ] 8.2 Generate API types from OpenAPI and build the API client with in-memory token and single-flight refresh on 401; verify Vitest tests with MSW for refresh success and refresh failure redirect
-- [ ] 8.3 Build register, login, forgot/reset password and change-password pages with inline validation; verify RTL tests for error display and preserved input
-- [ ] 8.4 Build the protected app layout with full navigation, mobile drawer under 1024 px, and coming-soon pages for unreleased sections; verify RTL tests that coming-soon pages make no API calls and a 375 px viewport check in Playwright
-- [ ] 8.5 Build Settings (profile, preferences incl. number grouping, account deletion with confirmation); verify RTL tests and the Indian grouping formatter test (`₹12,34,567.89`)
+- [x] 8.1 Build design tokens (light/dark CSS variables), theme provider applied before first paint, and base shadcn components; verify a Vitest test that theme preference toggles the root class and a manual contrast check in both themes
+- [x] 8.2 Generate API types from OpenAPI and build the API client with in-memory token and single-flight refresh on 401; verify Vitest tests with MSW for refresh success and refresh failure redirect
+- [x] 8.3 Build register, login, forgot/reset password and change-password pages with inline validation; verify RTL tests for error display and preserved input
+- [x] 8.4 Build the protected app layout with full navigation, mobile drawer under 1024 px, and coming-soon pages for unreleased sections; verify RTL tests that coming-soon pages make no API calls and a 375 px viewport check in Playwright
+- [x] 8.5 Build Settings (profile, preferences incl. number grouping, account deletion with confirmation); verify RTL tests and the Indian grouping formatter test (`₹12,34,567.89`)
 
 ## 9. Frontend features
 
-- [ ] 9.1 Build Accounts management UI (create/edit/archive, balances, summary); verify RTL tests for create and archive confirmation
-- [ ] 9.2 Build Categories management UI (subcategories, essential toggle, delete with replacement); verify RTL tests for replacement flow
-- [ ] 9.3 Build Transactions list with filters, search, pagination, and drill-down query params; verify RTL tests that filters map to query params
-- [ ] 9.4 Build transaction form (type-dependent fields, transfer, refund, salary breakdown, duplicate warning confirm) and delete confirmation; verify RTL tests for duplicate confirm and breakdown mismatch error
-- [ ] 9.5 Build receipt upload/view/delete and CSV export button; verify RTL tests for upload error messages
-- [ ] 9.6 Build CSV import wizard (upload, mapping, preview with errors/duplicates, confirm, undo); verify RTL tests for preview rendering and deselected duplicates
-- [ ] 9.7 Build Income and Expenses pages (source/category breakdowns) and Reports & Analytics P0 views with CSV export; verify RTL tests with MSW fixtures
-- [ ] 9.8 Build Overview dashboard (KPI tiles, period filter incl. custom and FY, income vs expense, savings trend, category donut with drill-down, recent transactions, skeleton/empty/error states, chart table alternatives); verify RTL tests for empty state and drill-down navigation
+- [x] 9.1 Build Accounts management UI (create/edit/archive, balances, summary); verify RTL tests for create and archive confirmation
+- [x] 9.2 Build Categories management UI (subcategories, essential toggle, delete with replacement); verify RTL tests for replacement flow
+- [x] 9.3 Build Transactions list with filters, search, pagination, and drill-down query params; verify RTL tests that filters map to query params
+- [x] 9.4 Build transaction form (type-dependent fields, transfer, refund, salary breakdown, duplicate warning confirm) and delete confirmation; verify RTL tests for duplicate confirm and breakdown mismatch error
+- [x] 9.5 Build receipt upload/view/delete and CSV export button; verify RTL tests for upload error messages
+- [x] 9.6 Build CSV import wizard (upload, mapping, preview with errors/duplicates, confirm, undo); verify RTL tests for preview rendering and deselected duplicates
+- [x] 9.7 Build Income and Expenses pages (source/category breakdowns) and Reports & Analytics P0 views with CSV export; verify RTL tests with MSW fixtures
+- [x] 9.8 Build Overview dashboard (KPI tiles, period filter incl. custom and FY, income vs expense, savings trend, category donut with drill-down, recent transactions, skeleton/empty/error states, chart table alternatives); verify RTL tests for empty state and drill-down navigation
 
 ## 10. Integration verification
 
