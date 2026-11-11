@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 DEV_JWT_SECRET = "change-me-dev-secret"  # noqa: S105 - known development default, rejected in prod
 DEV_DATABASE_URL = "postgresql+psycopg://fintrack_app:fintrack_app@localhost:54329/fintrack"
@@ -28,7 +28,11 @@ class Settings(BaseSettings):
     access_token_ttl_minutes: int = 15
     refresh_token_ttl_days: int = 7
     password_reset_ttl_minutes: int = 30
-    cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:5173"])
+    # Comma-separated in the environment (e.g. "https://a.example,https://b.example"); a JSON
+    # list is also accepted.
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        default_factory=lambda: ["http://localhost:5173"]
+    )
     smtp_host: str = "localhost"
     smtp_port: int = 1025
     smtp_from: str = "FinTrack <no-reply@fintrack.local>"
@@ -37,6 +41,18 @@ class Settings(BaseSettings):
     login_max_failures: int = 5
     login_window_seconds: int = 15 * 60
     api_rate_limit: str = "300/minute"
+
+    @field_validator("cors_origins", mode="before")
+    @classmethod
+    def _split_origins(cls, value: object) -> object:
+        if isinstance(value, str):
+            text = value.strip()
+            if text.startswith("["):
+                import json
+
+                return json.loads(text)
+            return [o.strip() for o in text.split(",") if o.strip()]
+        return value
 
     @property
     def is_production(self) -> bool:
