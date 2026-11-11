@@ -23,14 +23,14 @@
 
 ## 3. Authentication and users
 
-- [ ] 3.1 Create `users`, `user_preferences`, `refresh_tokens`, `password_reset_tokens` models and migration; verify migration up/down
-- [ ] 3.2 Implement registration (Argon2id, case-insensitive unique email, password policy with common-password list, default preferences); verify tests for success, `email_taken` and weak password
-- [ ] 3.3 Implement login, access JWT, refresh cookie, rotation with reuse detection and logout; verify tests for valid login, identical `invalid_credentials`, rotation, reuse revoking the family, and logout
-- [ ] 3.4 Implement login rate limiting per IP and per email; verify the sixth failed attempt returns 429 with `Retry-After`
-- [ ] 3.5 Implement password reset request/confirm with Mailpit SMTP adapter, hashed single-use 30-min tokens and session revocation; verify tests for unknown email (same 202), success, expiry
-- [ ] 3.6 Implement change password, profile read/update (email change requires password) and preferences (INR-only currency); verify tests including `unsupported_currency`
+- [x] 3.1 Create `users`, `user_preferences`, `refresh_tokens`, `password_reset_tokens` models and migration; verify migration up/down
+- [x] 3.2 Implement registration (Argon2id, case-insensitive unique email, password policy with common-password list, default preferences); verify tests for success, `email_taken` and weak password
+- [x] 3.3 Implement login, access JWT, refresh cookie, rotation with reuse detection and logout; verify tests for valid login, identical `invalid_credentials`, rotation, reuse revoking the family, and logout
+- [x] 3.4 Implement login rate limiting per IP and per email; verify the sixth failed attempt returns 429 with `Retry-After`
+- [x] 3.5 Implement password reset request/confirm with Mailpit SMTP adapter, hashed single-use 30-min tokens and session revocation; verify tests for unknown email (same 202), success, expiry
+- [x] 3.6 Implement change password, profile read/update (email change requires password) and preferences (INR-only currency); verify tests including `unsupported_currency`
 - [ ] 3.7 Implement account deletion (password confirmation, cascade delete of data and files, audit anonymization); verify a test that no records remain retrievable
-- [ ] 3.8 Implement the authenticated-user dependency and cross-tenant test harness (second user fixture + parametrized endpoint sweep); verify it runs against all auth/user endpoints
+- [x] 3.8 Implement the authenticated-user dependency and cross-tenant test harness (second user fixture + parametrized endpoint sweep); verify it runs against all auth/user endpoints
 
 ## 4. Accounts and categories
 

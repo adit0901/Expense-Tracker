@@ -11,6 +11,7 @@ from app.core.config import Settings, get_settings
 from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging
 from app.core.middleware import install_middleware
+from app.core.rate_limit import install_rate_limiting
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -36,6 +37,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         expose_headers=["X-Request-ID", "Retry-After", "Content-Disposition"],
     )
     register_exception_handlers(app)
+    install_rate_limiting(
+        app,
+        api_limit=settings.api_rate_limit,
+        max_failures=settings.login_max_failures,
+        window=settings.login_window_seconds,
+    )
     app.include_router(health.router)
     app.include_router(api_router)
     return app
