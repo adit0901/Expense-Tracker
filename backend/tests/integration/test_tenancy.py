@@ -83,3 +83,36 @@ def test_owned_resources_are_invisible_to_other_users(
     for probe in case.probes:
         if probe.method == "GET":
             assert user.get(probe.path.replace("{id}", resource_id)).status_code == 200
+
+
+def test_cannot_reference_other_users_accounts_or_categories(
+    user: AuthedUser, other_user: AuthedUser
+) -> None:
+    from tests.factories import cat_id, create_account
+
+    theirs = create_account(user, "A-Bank")
+    mine = create_account(other_user, "B-Bank")
+    their_food = cat_id(user, "Food")
+    base = {"type": "expense", "amount": "1.00", "payment_method": "upi", "txn_date": "2026-10-01"}
+    r1 = other_user.post(
+        "/api/v1/transactions",
+        json={**base, "account_id": theirs["id"], "category_id": cat_id(other_user, "Food")},
+    )
+    assert r1.status_code == 422 and r1.json()["error"]["code"] == "account_not_found"
+    r2 = other_user.post(
+        "/api/v1/transactions", json={**base, "account_id": mine["id"], "category_id": their_food}
+    )
+    assert r2.status_code == 422 and r2.json()["error"]["code"] == "category_not_found"
+    r3 = other_user.post(
+        "/api/v1/transactions",
+        json={
+            "type": "transfer",
+            "amount": "1.00",
+            "txn_date": "2026-10-01",
+            "account_id": mine["id"],
+            "counter_account_id": theirs["id"],
+        },
+    )
+    assert r3.status_code == 422
+    r4 = other_user.get("/api/v1/transactions", params={"account_id": theirs["id"]})
+    assert r4.json()["data"] == []

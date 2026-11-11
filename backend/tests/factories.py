@@ -71,3 +71,16 @@ def insert_txn(
     db.add(txn)
     db.commit()
     return txn
+
+
+def make_txn(u: AuthedUser, **body: object) -> dict[str, object]:
+    body.setdefault("txn_date", "2026-10-15")
+    resp = u.post("/api/v1/transactions", json=body)
+    assert resp.status_code == 201, resp.text
+    result: dict[str, object] = resp.json()["data"]
+    return result
+
+
+def cat_id(u: AuthedUser, name: str, kind: str = "expense") -> str:
+    cats = data(u.get("/api/v1/categories", params={"kind": kind, "page_size": 100}))
+    return str(next(c["id"] for c in cats if c["name"] == name))

@@ -29,7 +29,7 @@
 - [x] 3.4 Implement login rate limiting per IP and per email; verify the sixth failed attempt returns 429 with `Retry-After`
 - [x] 3.5 Implement password reset request/confirm with Mailpit SMTP adapter, hashed single-use 30-min tokens and session revocation; verify tests for unknown email (same 202), success, expiry
 - [x] 3.6 Implement change password, profile read/update (email change requires password) and preferences (INR-only currency); verify tests including `unsupported_currency`
-- [ ] 3.7 Implement account deletion (password confirmation, cascade delete of data and files, audit anonymization); verify a test that no records remain retrievable
+- [x] 3.7 Implement account deletion (password confirmation, cascade delete of data and files, audit anonymization); verify a test that no records remain retrievable
 - [x] 3.8 Implement the authenticated-user dependency and cross-tenant test harness (second user fixture + parametrized endpoint sweep); verify it runs against all auth/user endpoints
 
 ## 4. Accounts and categories
@@ -42,15 +42,15 @@
 ## 5. Transactions core
 
 - [x] 5.1 Create `transactions`, `salary_components`, `attachments`, `import_batches` models with DB CHECK constraints and indexes per D8; verify migration and constraint tests (e.g. transfer with category rejected)
-- [ ] 5.2 Implement `signed_effect` sign rules and derived account balance queries (bank, cash, wallet, credit card outstanding); verify table-driven unit tests and the accounts summary scenario (liquid 120000.00, card 5000.00)
-- [ ] 5.3 Implement create/read/update/delete for income, expense, transfer and refund with kind/payment-method/account validation; verify tests for each spec scenario (card bill transfer, same-account transfer, mismatch errors, decimals)
-- [ ] 5.4 Implement search/filter/sort (date range, type, account, category incl. subcategories, method, amount range, tag, text via trigram); verify tests including the Food-in-October scenario and SQL meta-character search
-- [ ] 5.5 Implement duplicate detection (D9) on create with `confirm_duplicate` and the duplicate-check endpoint; verify tests for warning and confirmed save
-- [ ] 5.6 Implement idempotency-key handling on transaction POST; verify a retried request with the same key creates one transaction
-- [ ] 5.7 Implement storage backend and receipt attachments (sniffed type allow-list, 10 MB limit, max 5, owner-only download, cascade delete); verify tests for disguised executable, 413, and cross-tenant download 404
-- [ ] 5.8 Implement CSV export with formula-injection escaping; verify a test with `=HYPERLINK` description
-- [ ] 5.9 Implement CSV import (upload, encoding detection, mapping, preview with errors and duplicate flags, atomic confirm, 24 h undo); verify tests for invalid-date row, atomic rollback on failure, undo
-- [ ] 5.10 Add transactions, attachments and imports to the cross-tenant sweep and audit assertions; verify the sweep passes
+- [x] 5.2 Implement `signed_effect` sign rules and derived account balance queries (bank, cash, wallet, credit card outstanding); verify table-driven unit tests and the accounts summary scenario (liquid 120000.00, card 5000.00)
+- [x] 5.3 Implement create/read/update/delete for income, expense, transfer and refund with kind/payment-method/account validation; verify tests for each spec scenario (card bill transfer, same-account transfer, mismatch errors, decimals)
+- [x] 5.4 Implement search/filter/sort (date range, type, account, category incl. subcategories, method, amount range, tag, text via trigram); verify tests including the Food-in-October scenario and SQL meta-character search
+- [x] 5.5 Implement duplicate detection (D9) on create with `confirm_duplicate` and the duplicate-check endpoint; verify tests for warning and confirmed save
+- [x] 5.6 Implement idempotency-key handling on transaction POST; verify a retried request with the same key creates one transaction
+- [x] 5.7 Implement storage backend and receipt attachments (sniffed type allow-list, 10 MB limit, max 5, owner-only download, cascade delete); verify tests for disguised executable, 413, and cross-tenant download 404
+- [x] 5.8 Implement CSV export with formula-injection escaping; verify a test with `=HYPERLINK` description
+- [x] 5.9 Implement CSV import (upload, encoding detection, mapping, preview with errors and duplicate flags, atomic confirm, 24 h undo); verify tests for invalid-date row, atomic rollback on failure, undo
+- [x] 5.10 Add transactions, attachments and imports to the cross-tenant sweep and audit assertions; verify the sweep passes
 
 ## 6. Income management and calculations
 

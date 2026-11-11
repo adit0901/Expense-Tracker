@@ -16,6 +16,7 @@ os.environ["MIGRATION_DATABASE_URL"] = os.environ.get(
 )
 os.environ.setdefault("JWT_SECRET", "test-secret-" + "x" * 32)
 os.environ["API_RATE_LIMIT"] = "100000/minute"
+os.environ["UPLOAD_DIR"] = __import__("tempfile").mkdtemp(prefix="fintrack-uploads-")
 
 import uuid
 from collections.abc import Callable, Iterator
