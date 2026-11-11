@@ -34,14 +34,14 @@
 
 ## 4. Accounts and categories
 
-- [ ] 4.1 Create `accounts` model/migration and CRUD + archive endpoints with last-4 validation; verify tests including `account_has_transactions` 409 and archive behavior
-- [ ] 4.2 Create `categories` model/migration; seed default income/expense categories (incl. system "Loan Interest" and essential flags) on registration; verify a test of a new user's categories
-- [ ] 4.3 Implement custom categories/subcategories (one level, case-insensitive uniqueness), essential toggle, delete-with-replacement and system-category protection; verify tests for third-level rejection, `category_in_use`, reassignment
-- [ ] 4.4 Add accounts and categories to the cross-tenant sweep and audit assertions; verify the sweep passes
+- [x] 4.1 Create `accounts` model/migration and CRUD + archive endpoints with last-4 validation; verify tests including `account_has_transactions` 409 and archive behavior
+- [x] 4.2 Create `categories` model/migration; seed default income/expense categories (incl. system "Loan Interest" and essential flags) on registration; verify a test of a new user's categories
+- [x] 4.3 Implement custom categories/subcategories (one level, case-insensitive uniqueness), essential toggle, delete-with-replacement and system-category protection; verify tests for third-level rejection, `category_in_use`, reassignment
+- [x] 4.4 Add accounts and categories to the cross-tenant sweep and audit assertions; verify the sweep passes
 
 ## 5. Transactions core
 
-- [ ] 5.1 Create `transactions`, `salary_components`, `attachments`, `import_batches` models with DB CHECK constraints and indexes per D8; verify migration and constraint tests (e.g. transfer with category rejected)
+- [x] 5.1 Create `transactions`, `salary_components`, `attachments`, `import_batches` models with DB CHECK constraints and indexes per D8; verify migration and constraint tests (e.g. transfer with category rejected)
 - [ ] 5.2 Implement `signed_effect` sign rules and derived account balance queries (bank, cash, wallet, credit card outstanding); verify table-driven unit tests and the accounts summary scenario (liquid 120000.00, card 5000.00)
 - [ ] 5.3 Implement create/read/update/delete for income, expense, transfer and refund with kind/payment-method/account validation; verify tests for each spec scenario (card bill transfer, same-account transfer, mismatch errors, decimals)
 - [ ] 5.4 Implement search/filter/sort (date range, type, account, category incl. subcategories, method, amount range, tag, text via trigram); verify tests including the Food-in-October scenario and SQL meta-character search

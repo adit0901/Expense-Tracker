@@ -11,6 +11,7 @@ from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+import app.services.categories  # noqa: F401  - registers default-category seeding hook
 from app.core.config import get_settings
 from app.core.errors import AppError, AuthError, ConflictError
 from app.core.rate_limit import FailedLoginLimiter
