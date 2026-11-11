@@ -1,0 +1,61 @@
+name: fintrack
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: fintrack
+      POSTGRES_PASSWORD: fintrack
+      POSTGRES_DB: fintrack
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infrastructure/db/init.sql:/docker-entrypoint-initdb.d/10-init.sql:ro
+    ports: ["54329:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fintrack"]
+      interval: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports: ["8025:8025", "1025:1025"]
+
+  backend:
+    build: { context: ., dockerfile: infrastructure/backend.Dockerfile }
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    env_file: [.env.example]
+    environment:
+      DATABASE_URL: postgresql+psycopg://fintrack_app:fintrack_app@db:5432/fintrack
+      MIGRATION_DATABASE_URL: postgresql+psycopg://fintrack:fintrack@db:5432/fintrack
+      SMTP_HOST: mailpit
+      UPLOAD_DIR: /data/uploads
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/alembic:/app/alembic
+      - uploads:/data/uploads
+    ports: ["8000:8000"]
+    depends_on:
+      db: { condition: service_healthy }
+
+  frontend:
+    image: node:24-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_API_PROXY: http://backend:8000
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    ports: ["5173:5173"]
+    depends_on: [backend]
+
+  web:
+    profiles: [prod]
+    build: { context: ., dockerfile: infrastructure/frontend.Dockerfile }
+    ports: ["8080:80"]
+    depends_on: [backend]
+
+volumes:
+  pgdata:
+  uploads:
+  frontend_node_modules:
