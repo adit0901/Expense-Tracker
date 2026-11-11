@@ -10,16 +10,16 @@
 
 ## 2. Platform foundation (backend core)
 
-- [ ] 2.1 Implement settings loader with production guard for missing/default secrets; verify a unit test that startup fails with `APP_ENV=production` and default JWT key
-- [ ] 2.2 Implement DB session management, Alembic baseline with `citext` and `pg_trgm` extensions; verify `alembic upgrade head` and `downgrade base` succeed in CI
-- [ ] 2.3 Implement response envelope, error envelope, domain exception handlers and 422 validation mapping; verify integration tests for 422 `details` and 500 without internals
-- [ ] 2.4 Implement pagination/sort helpers with page-size cap and sort allow-lists; verify tests for `page_size=500` and disallowed sort field
-- [ ] 2.5 Implement Decimal context, money types and string serialization; verify tests that 0.10+0.20+0.30 = 0.60 and amounts serialize as strings
-- [ ] 2.6 Implement request-id middleware and structlog JSON logging with redaction processor; verify a test asserting `X-Request-ID` header and that a logged payload with `password`/`amount` keys is redacted
-- [ ] 2.7 Implement `/health/live` and `/health/ready` (DB + migration head check); verify 503 when DB is unavailable in a test
-- [ ] 2.8 Add security headers, CORS allow-list and OpenAPI at `/api/docs` (non-prod only); verify tests for CORS rejection and docs disabled in production
-- [ ] 2.9 Implement audit-log model and service with no update/delete path, and a DB role grant restricting UPDATE/DELETE; verify a test that audit rows are created and cannot be modified
-- [ ] 2.10 Write `docs/architecture.md` (layers, module rules, API conventions); verify it matches the implemented envelope and pagination by linking the relevant tests
+- [x] 2.1 Implement settings loader with production guard for missing/default secrets; verify a unit test that startup fails with `APP_ENV=production` and default JWT key
+- [x] 2.2 Implement DB session management, Alembic baseline with `citext` and `pg_trgm` extensions; verify `alembic upgrade head` and `downgrade base` succeed in CI
+- [x] 2.3 Implement response envelope, error envelope, domain exception handlers and 422 validation mapping; verify integration tests for 422 `details` and 500 without internals
+- [x] 2.4 Implement pagination/sort helpers with page-size cap and sort allow-lists; verify tests for `page_size=500` and disallowed sort field
+- [x] 2.5 Implement Decimal context, money types and string serialization; verify tests that 0.10+0.20+0.30 = 0.60 and amounts serialize as strings
+- [x] 2.6 Implement request-id middleware and structlog JSON logging with redaction processor; verify a test asserting `X-Request-ID` header and that a logged payload with `password`/`amount` keys is redacted
+- [x] 2.7 Implement `/health/live` and `/health/ready` (DB + migration head check); verify 503 when DB is unavailable in a test
+- [x] 2.8 Add security headers, CORS allow-list and OpenAPI at `/api/docs` (non-prod only); verify tests for CORS rejection and docs disabled in production
+- [x] 2.9 Implement audit-log model and service with no update/delete path, and a DB role grant restricting UPDATE/DELETE; verify a test that audit rows are created and cannot be modified
+- [x] 2.10 Write `docs/architecture.md` (layers, module rules, API conventions); verify it matches the implemented envelope and pagination by linking the relevant tests
 
 ## 3. Authentication and users
 

@@ -21,9 +21,6 @@ CREATE ROLE fintrack_app LOGIN PASSWORD 'fintrack_app';
 CREATE DATABASE fintrack OWNER fintrack;
 CREATE DATABASE fintrack_test OWNER fintrack;
 SQL
-  for db in fintrack fintrack_test; do
-    psql_super -d "$db" -c "CREATE EXTENSION IF NOT EXISTS citext; CREATE EXTENSION IF NOT EXISTS pg_trgm;"
-  done
   echo "Initialized cluster at $PGDATA (port $PORT)"
 }
 
