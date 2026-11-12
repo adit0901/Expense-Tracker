@@ -77,3 +77,46 @@ test('custom period waits for both dates and passes them to the API', async () =
   expect(search).toContain('start=2026-07-15')
   expect(search).toContain('end=2026-09-15')
 })
+
+test('planning and balance sheet tiles show values and links', async () => {
+  renderApp('/')
+  const planning = await screen.findByRole('region', { name: 'Planning and balance sheet' })
+  expect(within(planning).getByText('Net Worth')).toBeInTheDocument()
+  expect(within(planning).getByText('₹25,00,000.00')).toBeInTheDocument()
+  expect(within(planning).getByText('Total Assets')).toBeInTheDocument()
+  expect(within(planning).getByText('₹35,00,000.00')).toBeInTheDocument()
+  expect(within(planning).getByText('Total Liabilities')).toBeInTheDocument()
+  expect(within(planning).getByText('₹10,00,000.00')).toBeInTheDocument()
+  expect(within(planning).getByText('Outstanding Loans')).toBeInTheDocument()
+  expect(within(planning).getByText('₹9,21,151.21')).toBeInTheDocument()
+  expect(within(planning).getByText('Monthly EMI')).toBeInTheDocument()
+  expect(within(planning).getByText('₹88,848.79')).toBeInTheDocument()
+})
+
+test('shows "Set a target" when savings target is not configured', async () => {
+  server.use(
+    http.get(`${API}/dashboard/overview`, () =>
+      HttpResponse.json({
+        data: overview({
+          savings_target: {
+            configured: false,
+            target_amount: null,
+            actual_savings: null,
+            achievement_pct: null,
+            shortfall: null,
+          },
+        }),
+        meta: {},
+      }),
+    ),
+  )
+  renderApp('/')
+  expect(await screen.findByRole('link', { name: 'Set a target' })).toBeInTheDocument()
+})
+
+test('budget alerts widget displays threshold crossed categories', async () => {
+  renderApp('/')
+  expect(await screen.findByText('Budget Status & Spending Alerts')).toBeInTheDocument()
+  expect(screen.getByText('100%')).toBeInTheDocument()
+  expect(screen.getByText('112.50%')).toBeInTheDocument()
+})

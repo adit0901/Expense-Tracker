@@ -92,6 +92,77 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/assets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Assets */
+        get: operations["list_assets_api_v1_assets_get"];
+        put?: never;
+        /** Create Asset */
+        post: operations["create_asset_api_v1_assets_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/assets/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Asset */
+        get: operations["get_asset_api_v1_assets__id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Asset */
+        patch: operations["update_asset_api_v1_assets__id__patch"];
+        trace?: never;
+    };
+    "/api/v1/assets/{id}/close": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Close Asset */
+        post: operations["close_asset_api_v1_assets__id__close_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/assets/{id}/valuations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Valuations */
+        get: operations["list_valuations_api_v1_assets__id__valuations_get"];
+        put?: never;
+        /** Add Valuation */
+        post: operations["add_valuation_api_v1_assets__id__valuations_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/attachments/{attachment_id}": {
         parameters: {
             query?: never;
@@ -229,6 +300,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/budget-alerts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Budget Alerts */
+        get: operations["list_budget_alerts_api_v1_budget_alerts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/budgets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Budget */
+        get: operations["get_budget_api_v1_budgets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/budgets/comparison": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Budget Comparison */
+        get: operations["get_budget_comparison_api_v1_budgets_comparison_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/budgets/{month}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set Budget */
+        put: operations["set_budget_api_v1_budgets__month__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/budgets/{month}/copy-from/{source_month}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Copy Budget */
+        post: operations["copy_budget_api_v1_budgets__month__copy_from__source_month__post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/categories": {
         parameters: {
             query?: never;
@@ -311,6 +467,95 @@ export interface paths {
         get: operations["trends_api_v1_dashboard_trends_get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/goals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Goals */
+        get: operations["list_goals_api_v1_goals_get"];
+        put?: never;
+        /** Create Goal */
+        post: operations["create_goal_api_v1_goals_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/goals/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Goal */
+        get: operations["get_goal_api_v1_goals__id__get"];
+        put?: never;
+        post?: never;
+        /** Delete Goal */
+        delete: operations["delete_goal_api_v1_goals__id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Goal */
+        patch: operations["update_goal_api_v1_goals__id__patch"];
+        trace?: never;
+    };
+    "/api/v1/goals/{id}/contributions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Contributions */
+        get: operations["list_contributions_api_v1_goals__id__contributions_get"];
+        put?: never;
+        /** Add Contribution */
+        post: operations["add_contribution_api_v1_goals__id__contributions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/goals/{id}/contributions/{contribution_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Delete Contribution */
+        delete: operations["delete_contribution_api_v1_goals__id__contributions__contribution_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/goals/{id}/withdrawals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Withdrawal */
+        post: operations["add_withdrawal_api_v1_goals__id__withdrawals_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -421,6 +666,268 @@ export interface paths {
         patch: operations["update_source_api_v1_income_sources__source_id__patch"];
         trace?: never;
     };
+    "/api/v1/liabilities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Liabilities */
+        get: operations["list_liabilities_api_v1_liabilities_get"];
+        put?: never;
+        /** Create Liability */
+        post: operations["create_liability_api_v1_liabilities_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/liabilities/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Liability */
+        get: operations["get_liability_api_v1_liabilities__id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Liability */
+        patch: operations["update_liability_api_v1_liabilities__id__patch"];
+        trace?: never;
+    };
+    "/api/v1/liabilities/{id}/balances": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Balances */
+        get: operations["list_balances_api_v1_liabilities__id__balances_get"];
+        put?: never;
+        /** Add Balance */
+        post: operations["add_balance_api_v1_liabilities__id__balances_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/liabilities/{id}/close": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Close Liability */
+        post: operations["close_liability_api_v1_liabilities__id__close_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/loans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Loans */
+        get: operations["list_loans_api_v1_loans_get"];
+        put?: never;
+        /** Create Loan */
+        post: operations["create_loan_api_v1_loans_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/loans/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Loans Summary */
+        get: operations["get_loans_summary_api_v1_loans_summary_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/loans/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Loan */
+        get: operations["get_loan_api_v1_loans__id__get"];
+        put?: never;
+        post?: never;
+        /** Delete Loan */
+        delete: operations["delete_loan_api_v1_loans__id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Loan */
+        patch: operations["update_loan_api_v1_loans__id__patch"];
+        trace?: never;
+    };
+    "/api/v1/loans/{id}/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Loan Event */
+        post: operations["add_loan_event_api_v1_loans__id__events_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/loans/{id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record Payment */
+        post: operations["record_payment_api_v1_loans__id__payments_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/loans/{id}/schedule": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Loan Schedule */
+        get: operations["get_loan_schedule_api_v1_loans__id__schedule_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/loans/{id}/simulate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Simulate */
+        post: operations["simulate_api_v1_loans__id__simulate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/metrics/emergency-fund": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Emergency Fund Metric */
+        get: operations["get_emergency_fund_metric_api_v1_metrics_emergency_fund_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/net-worth": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Net Worth */
+        get: operations["get_net_worth_api_v1_net_worth_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/net-worth/snapshots": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Snapshots */
+        get: operations["list_snapshots_api_v1_net_worth_snapshots_get"];
+        put?: never;
+        /** Create Snapshot */
+        post: operations["create_snapshot_api_v1_net_worth_snapshots_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/net-worth/snapshots/{as_of}/recompute": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Recompute Snapshot */
+        post: operations["recompute_snapshot_api_v1_net_worth_snapshots__as_of__recompute_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/reports/expenses": {
         parameters: {
             query?: never;
@@ -516,6 +1023,40 @@ export interface paths {
         /** Savings Trend Csv */
         get: operations["savings_trend_csv_api_v1_reports_savings_trend_export_csv_get"];
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/savings-targets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Savings Target */
+        get: operations["get_savings_target_api_v1_savings_targets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/savings-targets/{effective_from}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set Savings Target */
+        put: operations["set_savings_target_api_v1_savings_targets__effective_from__put"];
         post?: never;
         delete?: never;
         options?: never;
@@ -788,6 +1329,118 @@ export interface components {
             /** Wallet Balance */
             wallet_balance: string;
         };
+        /** AssetCloseIn */
+        AssetCloseIn: {
+            /**
+             * Closed At
+             * Format: date
+             */
+            closed_at: string;
+        };
+        /** AssetCreate */
+        AssetCreate: {
+            /** As Of */
+            as_of?: string | null;
+            /** Current Value */
+            current_value: number | string;
+            /** Details */
+            details?: {
+                [key: string]: unknown;
+            };
+            /**
+             * Is Liquid
+             * @default false
+             */
+            is_liquid: boolean;
+            /** Name */
+            name: string;
+            /** Type */
+            type: string;
+        };
+        /** AssetOut */
+        AssetOut: {
+            /** Closed At */
+            closed_at: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Current Value */
+            current_value: string;
+            /** Details */
+            details: {
+                [key: string]: unknown;
+            };
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Liquid */
+            is_liquid: boolean;
+            /** Latest Valuation Date */
+            latest_valuation_date: string | null;
+            /** Name */
+            name: string;
+            type: components["schemas"]["AssetType"];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /**
+         * AssetType
+         * @enum {string}
+         */
+        AssetType: "fixed_deposit" | "gold" | "real_estate" | "ppf" | "epf" | "nps" | "mutual_fund" | "vehicle" | "other";
+        /** AssetUpdate */
+        AssetUpdate: {
+            /** Details */
+            details?: {
+                [key: string]: unknown;
+            } | null;
+            /** Is Liquid */
+            is_liquid?: boolean | null;
+            /** Name */
+            name?: string | null;
+        };
+        /** AssetValuationIn */
+        AssetValuationIn: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Value */
+            value: number | string;
+        };
+        /** AssetValuationOut */
+        AssetValuationOut: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /**
+             * Asset Id
+             * Format: uuid
+             */
+            asset_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Value */
+            value: string;
+        };
         /** AttachmentOut */
         AttachmentOut: {
             /**
@@ -832,6 +1485,15 @@ export interface components {
             /** File */
             file: string;
         };
+        /** BreakdownItemOut */
+        BreakdownItemOut: {
+            /** Amount */
+            amount: string;
+            /** Category */
+            category: string;
+            /** Share Pct */
+            share_pct: string;
+        };
         /** BreakdownRow */
         BreakdownRow: {
             /** Category Id */
@@ -846,6 +1508,141 @@ export interface components {
             share: string | null;
             /** Total */
             total: string;
+        };
+        /** BudgetAlertDashboardItem */
+        BudgetAlertDashboardItem: {
+            /** Budgeted */
+            budgeted: string;
+            /** Category Id */
+            category_id: string | null;
+            /** Category Name */
+            category_name: string;
+            /** Spent */
+            spent: string;
+            /** Threshold Crossed */
+            threshold_crossed: number;
+            /** Utilization Pct */
+            utilization_pct: string;
+        };
+        /** BudgetAlertResponse */
+        BudgetAlertResponse: {
+            /** Budget Line Id */
+            budget_line_id?: string | null;
+            /** Category Id */
+            category_id?: string | null;
+            /** Category Name */
+            category_name?: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Month */
+            month: string;
+            /** Threshold */
+            threshold: number;
+            /**
+             * Triggered At
+             * Format: date-time
+             */
+            triggered_at: string;
+        };
+        /** BudgetComparisonResponse */
+        BudgetComparisonResponse: {
+            /** Category Id */
+            category_id?: string | null;
+            /** Category Name */
+            category_name?: string | null;
+            /** Months */
+            months?: components["schemas"]["BudgetMonthComparisonItem"][];
+        };
+        /** BudgetLineInput */
+        BudgetLineInput: {
+            /** Alert Thresholds */
+            alert_thresholds?: number[];
+            /** Amount */
+            amount: number | string;
+            /**
+             * Category Id
+             * Format: uuid
+             */
+            category_id: string;
+        };
+        /** BudgetLineResponse */
+        BudgetLineResponse: {
+            /** Actual */
+            actual: string;
+            /** Alert Thresholds */
+            alert_thresholds: number[];
+            /** Amount */
+            amount: string;
+            /**
+             * Category Id
+             * Format: uuid
+             */
+            category_id: string;
+            /** Category Name */
+            category_name: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Over Budget */
+            is_over_budget: boolean;
+            /** Parent Id */
+            parent_id?: string | null;
+            /** Remaining */
+            remaining: string;
+            /** Utilization */
+            utilization: string;
+        };
+        /** BudgetMonthComparisonItem */
+        BudgetMonthComparisonItem: {
+            /** Actual */
+            actual: string;
+            /** Budget */
+            budget?: string | null;
+            /**
+             * Is Over Budget
+             * @default false
+             */
+            is_over_budget: boolean;
+            /** Month */
+            month: string;
+            /** Month Label */
+            month_label: string;
+            /** Remaining */
+            remaining?: string | null;
+            /** Utilization */
+            utilization?: string | null;
+        };
+        /** BudgetResponse */
+        BudgetResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Lines */
+            lines?: components["schemas"]["BudgetLineResponse"][];
+            /** Month */
+            month: string;
+            /** Overall Actual */
+            overall_actual: string;
+            /** Overall Amount */
+            overall_amount?: string | null;
+            /**
+             * Overall Is Over Budget
+             * @default false
+             */
+            overall_is_over_budget: boolean;
+            /** Overall Remaining */
+            overall_remaining?: string | null;
+            /** Overall Utilization */
+            overall_utilization?: string | null;
+            /** Warning */
+            warning?: string | null;
         };
         /** CategoryAmount */
         CategoryAmount: {
@@ -984,6 +1781,15 @@ export interface components {
             /** Is Possible Duplicate */
             is_possible_duplicate: boolean;
         };
+        /** EmergencyFundMetricsOut */
+        EmergencyFundMetricsOut: {
+            /** Coverage Months */
+            coverage_months: string | null;
+            /** Essential Monthly Expenses */
+            essential_monthly_expenses: string;
+            /** Liquid Savings */
+            liquid_savings: string;
+        };
         /** Envelope[AccountOut] */
         Envelope_AccountOut_: {
             data: components["schemas"]["AccountOut"];
@@ -1000,9 +1806,41 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** Envelope[AssetOut] */
+        Envelope_AssetOut_: {
+            data: components["schemas"]["AssetOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[AssetValuationOut] */
+        Envelope_AssetValuationOut_: {
+            data: components["schemas"]["AssetValuationOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
         /** Envelope[AttachmentOut] */
         Envelope_AttachmentOut_: {
             data: components["schemas"]["AttachmentOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[BudgetComparisonResponse] */
+        Envelope_BudgetComparisonResponse_: {
+            data: components["schemas"]["BudgetComparisonResponse"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[BudgetResponse] */
+        Envelope_BudgetResponse_: {
+            data: components["schemas"]["BudgetResponse"];
             /** Meta */
             meta?: {
                 [key: string]: unknown;
@@ -1040,9 +1878,33 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** Envelope[EmergencyFundMetricsOut] */
+        Envelope_EmergencyFundMetricsOut_: {
+            data: components["schemas"]["EmergencyFundMetricsOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
         /** Envelope[ExpenseReport] */
         Envelope_ExpenseReport_: {
             data: components["schemas"]["ExpenseReport"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[GoalContributionOut] */
+        Envelope_GoalContributionOut_: {
+            data: components["schemas"]["GoalContributionOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[GoalOut] */
+        Envelope_GoalOut_: {
+            data: components["schemas"]["GoalOut"];
             /** Meta */
             meta?: {
                 [key: string]: unknown;
@@ -1072,9 +1934,89 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** Envelope[LiabilityBalanceOut] */
+        Envelope_LiabilityBalanceOut_: {
+            data: components["schemas"]["LiabilityBalanceOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LiabilityOut] */
+        Envelope_LiabilityOut_: {
+            data: components["schemas"]["LiabilityOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LoanEventOut] */
+        Envelope_LoanEventOut_: {
+            data: components["schemas"]["LoanEventOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LoanOut] */
+        Envelope_LoanOut_: {
+            data: components["schemas"]["LoanOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LoanPaymentOut] */
+        Envelope_LoanPaymentOut_: {
+            data: components["schemas"]["LoanPaymentOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LoanScheduleOut] */
+        Envelope_LoanScheduleOut_: {
+            data: components["schemas"]["LoanScheduleOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LoanSimulateOut] */
+        Envelope_LoanSimulateOut_: {
+            data: components["schemas"]["LoanSimulateOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[LoanSummaryOut] */
+        Envelope_LoanSummaryOut_: {
+            data: components["schemas"]["LoanSummaryOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
         /** Envelope[MessageOut] */
         Envelope_MessageOut_: {
             data: components["schemas"]["MessageOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[NetWorthOut] */
+        Envelope_NetWorthOut_: {
+            data: components["schemas"]["NetWorthOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[NetWorthSnapshotOut] */
+        Envelope_NetWorthSnapshotOut_: {
+            data: components["schemas"]["NetWorthSnapshotOut"];
             /** Meta */
             meta?: {
                 [key: string]: unknown;
@@ -1091,6 +2033,14 @@ export interface components {
         /** Envelope[PreferencesOut] */
         Envelope_PreferencesOut_: {
             data: components["schemas"]["PreferencesOut"];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[SavingsTargetOut] */
+        Envelope_SavingsTargetOut_: {
+            data: components["schemas"]["SavingsTargetOut"];
             /** Meta */
             meta?: {
                 [key: string]: unknown;
@@ -1128,6 +2078,87 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** Envelope[list[AssetOut]] */
+        Envelope_list_AssetOut__: {
+            /** Data */
+            data: components["schemas"]["AssetOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[AssetValuationOut]] */
+        Envelope_list_AssetValuationOut__: {
+            /** Data */
+            data: components["schemas"]["AssetValuationOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[BudgetAlertResponse]] */
+        Envelope_list_BudgetAlertResponse__: {
+            /** Data */
+            data: components["schemas"]["BudgetAlertResponse"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[GoalContributionOut]] */
+        Envelope_list_GoalContributionOut__: {
+            /** Data */
+            data: components["schemas"]["GoalContributionOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[GoalOut]] */
+        Envelope_list_GoalOut__: {
+            /** Data */
+            data: components["schemas"]["GoalOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[LiabilityBalanceOut]] */
+        Envelope_list_LiabilityBalanceOut__: {
+            /** Data */
+            data: components["schemas"]["LiabilityBalanceOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[LiabilityOut]] */
+        Envelope_list_LiabilityOut__: {
+            /** Data */
+            data: components["schemas"]["LiabilityOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[LoanOut]] */
+        Envelope_list_LoanOut__: {
+            /** Data */
+            data: components["schemas"]["LoanOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
+        /** Envelope[list[NetWorthSnapshotOut]] */
+        Envelope_list_NetWorthSnapshotOut__: {
+            /** Data */
+            data: components["schemas"]["NetWorthSnapshotOut"][];
+            /** Meta */
+            meta?: {
+                [key: string]: unknown;
+            };
+        };
         /** ExpenseCategoryRow */
         ExpenseCategoryRow: {
             /** Category Id */
@@ -1155,6 +2186,150 @@ export interface components {
             period: components["schemas"]["PeriodOut"];
             /** Total Expenses */
             total_expenses: string;
+        };
+        /** GoalContributionCreate */
+        GoalContributionCreate: {
+            /** Amount */
+            amount: number | string;
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /** @default contribution */
+            kind: components["schemas"]["GoalContributionKind"];
+            /** Notes */
+            notes?: string | null;
+            /** Transaction Id */
+            transaction_id?: string | null;
+        };
+        /**
+         * GoalContributionKind
+         * @enum {string}
+         */
+        GoalContributionKind: "contribution" | "withdrawal";
+        /** GoalContributionOut */
+        GoalContributionOut: {
+            /** Amount */
+            amount: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /**
+             * Goal Id
+             * Format: uuid
+             */
+            goal_id: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            kind: components["schemas"]["GoalContributionKind"];
+            /** Notes */
+            notes: string | null;
+            /** Transaction Id */
+            transaction_id: string | null;
+        };
+        /** GoalCreate */
+        GoalCreate: {
+            /** Name */
+            name: string;
+            /** Notes */
+            notes?: string | null;
+            /**
+             * Starting Amount
+             * @default 0.00
+             */
+            starting_amount: number | string;
+            /** Target Amount */
+            target_amount: number | string;
+            /** Target Date */
+            target_date?: string | null;
+            type: components["schemas"]["GoalType"];
+        };
+        /** GoalOut */
+        GoalOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Current Amount */
+            current_amount: string;
+            /** Estimated Completion Date */
+            estimated_completion_date: string | null;
+            /** Estimated Completion Label */
+            estimated_completion_label: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Achieved */
+            is_achieved: boolean;
+            /** Is Overdue */
+            is_overdue: boolean;
+            /** Name */
+            name: string;
+            /** Notes */
+            notes: string | null;
+            /** Progress Pct */
+            progress_pct: string;
+            /** Remaining Amount */
+            remaining_amount: string;
+            /** Required Monthly Contribution */
+            required_monthly_contribution: string | null;
+            /** Starting Amount */
+            starting_amount: string;
+            status: components["schemas"]["GoalStatus"];
+            /** Target Amount */
+            target_amount: string;
+            /** Target Date */
+            target_date: string | null;
+            type: components["schemas"]["GoalType"];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /**
+         * GoalStatus
+         * @enum {string}
+         */
+        GoalStatus: "active" | "paused" | "completed" | "archived";
+        /**
+         * GoalType
+         * @enum {string}
+         */
+        GoalType: "emergency_fund" | "vacation" | "house" | "vehicle" | "education" | "retirement" | "other";
+        /** GoalUpdate */
+        GoalUpdate: {
+            /** Name */
+            name?: string | null;
+            /** Notes */
+            notes?: string | null;
+            status?: components["schemas"]["GoalStatus"] | null;
+            /** Target Amount */
+            target_amount?: number | string | null;
+            /** Target Date */
+            target_date?: string | null;
+            type?: components["schemas"]["GoalType"] | null;
+        };
+        /** GrowthOut */
+        GrowthOut: {
+            /** Amount Change */
+            amount_change?: string | null;
+            /** Percentage Change */
+            percentage_change?: string | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -1312,6 +2487,425 @@ export interface components {
             name?: string | null;
             type?: components["schemas"]["IncomeSourceType"] | null;
         };
+        /** InstallmentOut */
+        InstallmentOut: {
+            /** Closing Outstanding */
+            closing_outstanding: string;
+            /**
+             * Due Date
+             * Format: date
+             */
+            due_date: string;
+            /** Installment No */
+            installment_no: number;
+            /** Interest */
+            interest: string;
+            /** Is Paid */
+            is_paid: boolean;
+            /** Paid Date */
+            paid_date?: string | null;
+            /** Payment */
+            payment: string;
+            /** Principal */
+            principal: string;
+        };
+        /** LiabilityBalanceIn */
+        LiabilityBalanceIn: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Balance */
+            balance: number | string;
+        };
+        /** LiabilityBalanceOut */
+        LiabilityBalanceOut: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Balance */
+            balance: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Liability Id
+             * Format: uuid
+             */
+            liability_id: string;
+        };
+        /** LiabilityCloseIn */
+        LiabilityCloseIn: {
+            /**
+             * Closed At
+             * Format: date
+             */
+            closed_at: string;
+        };
+        /** LiabilityCreate */
+        LiabilityCreate: {
+            /** As Of */
+            as_of?: string | null;
+            /** Current Balance */
+            current_balance: number | string;
+            /** Name */
+            name: string;
+            /** Notes */
+            notes?: string | null;
+        };
+        /** LiabilityOut */
+        LiabilityOut: {
+            /** Closed At */
+            closed_at: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Current Balance */
+            current_balance: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Latest Balance Date */
+            latest_balance_date: string | null;
+            /** Name */
+            name: string;
+            /** Notes */
+            notes: string | null;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** LiabilityUpdate */
+        LiabilityUpdate: {
+            /** Name */
+            name?: string | null;
+            /** Notes */
+            notes?: string | null;
+        };
+        /** LoanCreate */
+        LoanCreate: {
+            /** Annual Rate */
+            annual_rate: number | string;
+            /** Baseline Date */
+            baseline_date?: string | null;
+            /** Baseline Outstanding */
+            baseline_outstanding?: number | string | null;
+            /** Emi Amount */
+            emi_amount?: number | string | null;
+            /** First Emi Date */
+            first_emi_date?: string | null;
+            /** Lender */
+            lender: string;
+            /** Notes */
+            notes?: string | null;
+            /** Original Principal */
+            original_principal: number | string;
+            /**
+             * Start Date
+             * Format: date
+             */
+            start_date: string;
+            /** Tenure Months */
+            tenure_months: number;
+            type: components["schemas"]["LoanType"];
+        };
+        /** LoanEventCreate */
+        LoanEventCreate: {
+            /**
+             * Effective Date
+             * Format: date
+             */
+            effective_date: string;
+            kind: components["schemas"]["LoanEventKind"];
+            /** Payload */
+            payload?: {
+                [key: string]: unknown;
+            };
+        };
+        /**
+         * LoanEventKind
+         * @enum {string}
+         */
+        LoanEventKind: "rate_change" | "prepayment" | "emi_override";
+        /** LoanEventOut */
+        LoanEventOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Effective Date
+             * Format: date
+             */
+            effective_date: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            kind: components["schemas"]["LoanEventKind"];
+            /**
+             * Loan Id
+             * Format: uuid
+             */
+            loan_id: string;
+            /** Payload */
+            payload: {
+                [key: string]: unknown;
+            };
+        };
+        /** LoanOut */
+        LoanOut: {
+            /** Annual Rate */
+            annual_rate: string;
+            /**
+             * Baseline Date
+             * Format: date
+             */
+            baseline_date: string;
+            /** Baseline Outstanding */
+            baseline_outstanding: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Current Outstanding */
+            current_outstanding: string;
+            /** Emi Amount */
+            emi_amount: string;
+            /** Emi Overridden */
+            emi_overridden: boolean;
+            /** End Date */
+            end_date: string | null;
+            /**
+             * First Emi Date
+             * Format: date
+             */
+            first_emi_date: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Lender */
+            lender: string;
+            /** Next Emi Amount */
+            next_emi_amount: string | null;
+            /** Next Emi Date */
+            next_emi_date: string | null;
+            /** Notes */
+            notes: string | null;
+            /** Original Principal */
+            original_principal: string;
+            /** Paid Interest */
+            paid_interest: string;
+            /** Paid Principal */
+            paid_principal: string;
+            /** Remaining Installments */
+            remaining_installments: number;
+            /** Remaining Interest */
+            remaining_interest: string;
+            /**
+             * Start Date
+             * Format: date
+             */
+            start_date: string;
+            status: components["schemas"]["LoanStatus"];
+            /** Tenure Months */
+            tenure_months: number;
+            type: components["schemas"]["LoanType"];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** LoanPaymentCreate */
+        LoanPaymentCreate: {
+            /**
+             * Account Id
+             * Format: uuid
+             */
+            account_id: string;
+            /** Amount */
+            amount?: number | string | null;
+            /** Installment No */
+            installment_no?: number | null;
+            /** Interest Component */
+            interest_component?: number | string | null;
+            /** Notes */
+            notes?: string | null;
+            /**
+             * Payment Date
+             * Format: date
+             */
+            payment_date: string;
+            /**
+             * Payment Type
+             * @default installment
+             * @enum {string}
+             */
+            payment_type: "installment" | "prepayment";
+            /** Principal Component */
+            principal_component?: number | string | null;
+            /** Strategy */
+            strategy?: ("reduce_tenure" | "reduce_emi") | null;
+        };
+        /** LoanPaymentOut */
+        LoanPaymentOut: {
+            /**
+             * Account Id
+             * Format: uuid
+             */
+            account_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Current Outstanding */
+            current_outstanding: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Installment No */
+            installment_no: number | null;
+            /** Interest */
+            interest: string;
+            /**
+             * Loan Id
+             * Format: uuid
+             */
+            loan_id: string;
+            /**
+             * Payment Date
+             * Format: date
+             */
+            payment_date: string;
+            /** Principal */
+            principal: string;
+            /** Total Amount */
+            total_amount: string;
+            /**
+             * Transaction Id
+             * Format: uuid
+             */
+            transaction_id: string;
+        };
+        /** LoanScheduleOut */
+        LoanScheduleOut: {
+            /** Emi */
+            emi: string;
+            /** End Date */
+            end_date: string | null;
+            /** Installments */
+            installments: components["schemas"]["InstallmentOut"][];
+            /**
+             * Loan Id
+             * Format: uuid
+             */
+            loan_id: string;
+            /** Total Interest */
+            total_interest: string;
+            /** Total Principal */
+            total_principal: string;
+        };
+        /** LoanSimulateOut */
+        LoanSimulateOut: {
+            /** Current Emi */
+            current_emi: string;
+            /** Current End Date */
+            current_end_date: string | null;
+            /** Current Tenure Months */
+            current_tenure_months: number;
+            /** Current Total Interest */
+            current_total_interest: string;
+            /** Interest Saved */
+            interest_saved: string;
+            /** Simulated Emi */
+            simulated_emi: string;
+            /** Simulated End Date */
+            simulated_end_date: string | null;
+            /** Simulated Tenure Months */
+            simulated_tenure_months: number;
+            /** Simulated Total Interest */
+            simulated_total_interest: string;
+            /** Tenure Months Saved */
+            tenure_months_saved: number;
+        };
+        /** LoanSimulateRequest */
+        LoanSimulateRequest: {
+            /** Amount */
+            amount?: number | string | null;
+            /** Annual Rate */
+            annual_rate?: number | string | null;
+            /**
+             * Effective Date
+             * Format: date
+             */
+            effective_date: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "one_time_prepayment" | "extra_monthly_payment" | "rate_change";
+            /** Strategy */
+            strategy?: ("reduce_tenure" | "reduce_emi" | "keep_emi" | "keep_tenure") | null;
+        };
+        /**
+         * LoanStatus
+         * @enum {string}
+         */
+        LoanStatus: "active" | "closed";
+        /** LoanSummaryOut */
+        LoanSummaryOut: {
+            /** Active Loans Count */
+            active_loans_count: number;
+            /** Total Monthly Emi Commitment */
+            total_monthly_emi_commitment: string;
+            /** Total Outstanding */
+            total_outstanding: string;
+        };
+        /** LoanTrendPoint */
+        LoanTrendPoint: {
+            /** Month */
+            month: string;
+            /** Total Outstanding */
+            total_outstanding: string;
+        };
+        /**
+         * LoanType
+         * @enum {string}
+         */
+        LoanType: "home" | "car" | "personal" | "education" | "other";
+        /** LoanUpdate */
+        LoanUpdate: {
+            /** Lender */
+            lender?: string | null;
+            /** Notes */
+            notes?: string | null;
+            status?: components["schemas"]["LoanStatus"] | null;
+        };
         /** LoginIn */
         LoginIn: {
             /**
@@ -1360,8 +2954,92 @@ export interface components {
             /** Month */
             month: string;
         };
+        /** NetWorthOut */
+        NetWorthOut: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Asset Breakdown */
+            asset_breakdown: components["schemas"]["BreakdownItemOut"][];
+            /**
+             * Is Stale
+             * @default false
+             */
+            is_stale: boolean;
+            /** Liability Breakdown */
+            liability_breakdown: components["schemas"]["BreakdownItemOut"][];
+            /** Liquid Assets */
+            liquid_assets: string;
+            mom_growth?: components["schemas"]["GrowthOut"] | null;
+            /** Net Worth */
+            net_worth: string;
+            /** Total Assets */
+            total_assets: string;
+            /** Total Liabilities */
+            total_liabilities: string;
+            yoy_growth?: components["schemas"]["GrowthOut"] | null;
+        };
+        /** NetWorthPoint */
+        NetWorthPoint: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Net Worth */
+            net_worth: string;
+            /** Total Assets */
+            total_assets: string;
+            /** Total Liabilities */
+            total_liabilities: string;
+        };
+        /** NetWorthSnapshotCreate */
+        NetWorthSnapshotCreate: {
+            /** As Of */
+            as_of?: string | null;
+        };
+        /** NetWorthSnapshotOut */
+        NetWorthSnapshotOut: {
+            /**
+             * As Of
+             * Format: date
+             */
+            as_of: string;
+            /** Breakdown */
+            breakdown: {
+                [key: string]: unknown;
+            };
+            /**
+             * Computed At
+             * Format: date-time
+             */
+            computed_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Stale */
+            is_stale: boolean;
+            /** Net Worth */
+            net_worth: string;
+            /** Total Assets */
+            total_assets: string;
+            /** Total Liabilities */
+            total_liabilities: string;
+        };
         /** Overview */
         Overview: {
+            /** Asset Allocation */
+            asset_allocation?: {
+                [key: string]: unknown;
+            }[];
+            /** Budget Alerts */
+            budget_alerts?: components["schemas"]["BudgetAlertDashboardItem"][];
+            /** Budget Utilization Pct */
+            budget_utilization_pct?: string | null;
             expenses: components["schemas"]["Tile"];
             /** Has Accounts */
             has_accounts: boolean;
@@ -1369,10 +3047,20 @@ export interface components {
             has_transactions: boolean;
             income: components["schemas"]["Tile"];
             liquid_funds: components["schemas"]["Tile"];
+            /** Loan Trend */
+            loan_trend?: components["schemas"]["LoanTrendPoint"][];
+            monthly_emi_commitment?: components["schemas"]["PlanningTile"] | null;
+            net_worth?: components["schemas"]["PlanningTile"] | null;
+            /** Net Worth Trend */
+            net_worth_trend?: components["schemas"]["NetWorthPoint"][];
+            outstanding_loans?: components["schemas"]["PlanningTile"] | null;
             period: components["schemas"]["PeriodOut"];
             previous_period: components["schemas"]["PeriodOut"];
             savings: components["schemas"]["Tile"];
             savings_rate: components["schemas"]["Tile"];
+            savings_target?: components["schemas"]["SavingsTargetDashboardTile"] | null;
+            total_assets?: components["schemas"]["PlanningTile"] | null;
+            total_liabilities?: components["schemas"]["PlanningTile"] | null;
         };
         /** PageEnvelope[AccountOut] */
         PageEnvelope_AccountOut_: {
@@ -1444,6 +3132,20 @@ export interface components {
              * Format: date
              */
             start: string;
+        };
+        /** PlanningTile */
+        PlanningTile: {
+            /** Change */
+            change?: string | null;
+            /**
+             * Change Kind
+             * @default percent
+             */
+            change_kind: string;
+            /** Previous */
+            previous?: string | null;
+            /** Value */
+            value: string;
         };
         /** PreferencesOut */
         PreferencesOut: {
@@ -1565,11 +3267,58 @@ export interface components {
             /** Total Deductions */
             total_deductions: string;
         };
+        /** SavingsTargetDashboardTile */
+        SavingsTargetDashboardTile: {
+            /** Achievement Pct */
+            achievement_pct?: string | null;
+            /** Actual Savings */
+            actual_savings?: string | null;
+            /** Configured */
+            configured: boolean;
+            /** Shortfall */
+            shortfall?: string | null;
+            /** Target Amount */
+            target_amount?: string | null;
+        };
+        /** SavingsTargetIn */
+        SavingsTargetIn: {
+            /** Amount */
+            amount: number | string;
+        };
+        /** SavingsTargetOut */
+        SavingsTargetOut: {
+            /** Achievement Pct */
+            achievement_pct: string;
+            /** Actual Savings */
+            actual_savings: string;
+            /**
+             * Effective From
+             * Format: date
+             */
+            effective_from: string;
+            /** Id */
+            id?: string | null;
+            /** Is Achieved */
+            is_achieved: boolean;
+            /** Month */
+            month: string;
+            /** Shortfall */
+            shortfall: string;
+            /** Target Amount */
+            target_amount: string;
+        };
         /** SavingsTrend */
         SavingsTrend: {
             /** Months */
             months: components["schemas"]["MonthFigures"][];
             period: components["schemas"]["PeriodOut"];
+        };
+        /** SetBudgetRequest */
+        SetBudgetRequest: {
+            /** Lines */
+            lines?: components["schemas"]["BudgetLineInput"][];
+            /** Overall Amount */
+            overall_amount?: number | string | null;
         };
         /** SourceTotal */
         SourceTotal: {
@@ -1756,7 +3505,7 @@ export interface components {
          * TransactionType
          * @enum {string}
          */
-        TransactionType: "income" | "expense" | "transfer" | "refund";
+        TransactionType: "income" | "expense" | "transfer" | "refund" | "loan_payment";
         /** TransactionUpdate */
         TransactionUpdate: {
             /** Account Id */
@@ -2075,6 +3824,240 @@ export interface operations {
             };
         };
     };
+    list_assets_api_v1_assets_get: {
+        parameters: {
+            query?: {
+                as_of?: string | null;
+                include_closed?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_AssetOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_asset_api_v1_assets_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssetCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_AssetOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_asset_api_v1_assets__id__get: {
+        parameters: {
+            query?: {
+                as_of?: string | null;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_AssetOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_asset_api_v1_assets__id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssetUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_AssetOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    close_asset_api_v1_assets__id__close_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssetCloseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_AssetOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_valuations_api_v1_assets__id__valuations_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_AssetValuationOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_valuation_api_v1_assets__id__valuations_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssetValuationIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_AssetValuationOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     download_attachment_api_v1_attachments__attachment_id__get: {
         parameters: {
             query?: never;
@@ -2347,6 +4330,168 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Envelope_UserOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_budget_alerts_api_v1_budget_alerts_get: {
+        parameters: {
+            query?: {
+                month?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_BudgetAlertResponse__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_budget_api_v1_budgets_get: {
+        parameters: {
+            query: {
+                /** @description Month in YYYY-MM format */
+                month: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_BudgetResponse_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_budget_comparison_api_v1_budgets_comparison_get: {
+        parameters: {
+            query?: {
+                category_id?: string | null;
+                months?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_BudgetComparisonResponse_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_budget_api_v1_budgets__month__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                month: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetBudgetRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_BudgetResponse_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    copy_budget_api_v1_budgets__month__copy_from__source_month__post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                month: string;
+                source_month: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_BudgetResponse_"];
                 };
             };
             /** @description Validation Error */
@@ -2635,6 +4780,296 @@ export interface operations {
             };
         };
     };
+    list_goals_api_v1_goals_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["GoalStatus"] | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_GoalOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_goal_api_v1_goals_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GoalCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_GoalOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_goal_api_v1_goals__id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_GoalOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_goal_api_v1_goals__id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_goal_api_v1_goals__id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GoalUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_GoalOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_contributions_api_v1_goals__id__contributions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_GoalContributionOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_contribution_api_v1_goals__id__contributions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GoalContributionCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_GoalContributionOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_contribution_api_v1_goals__id__contributions__contribution_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                contribution_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_withdrawal_api_v1_goals__id__withdrawals_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GoalContributionCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_GoalContributionOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     upload_import_api_v1_imports_post: {
         parameters: {
             query?: never;
@@ -2901,6 +5336,703 @@ export interface operations {
             };
         };
     };
+    list_liabilities_api_v1_liabilities_get: {
+        parameters: {
+            query?: {
+                as_of?: string | null;
+                include_closed?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_LiabilityOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_liability_api_v1_liabilities_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LiabilityCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LiabilityOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_liability_api_v1_liabilities__id__get: {
+        parameters: {
+            query?: {
+                as_of?: string | null;
+            };
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LiabilityOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_liability_api_v1_liabilities__id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LiabilityUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LiabilityOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_balances_api_v1_liabilities__id__balances_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_LiabilityBalanceOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_balance_api_v1_liabilities__id__balances_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LiabilityBalanceIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LiabilityBalanceOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    close_liability_api_v1_liabilities__id__close_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LiabilityCloseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LiabilityOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_loans_api_v1_loans_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["LoanStatus"] | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_LoanOut__"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_loan_api_v1_loans_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoanCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_loans_summary_api_v1_loans_summary_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanSummaryOut_"];
+                };
+            };
+        };
+    };
+    get_loan_api_v1_loans__id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_loan_api_v1_loans__id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_loan_api_v1_loans__id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoanUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_loan_event_api_v1_loans__id__events_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoanEventCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanEventOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    record_payment_api_v1_loans__id__payments_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoanPaymentCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanPaymentOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_loan_schedule_api_v1_loans__id__schedule_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanScheduleOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    simulate_api_v1_loans__id__simulate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoanSimulateRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_LoanSimulateOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_emergency_fund_metric_api_v1_metrics_emergency_fund_get: {
+        parameters: {
+            query?: {
+                /** @description As of date */
+                as_of?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_EmergencyFundMetricsOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_net_worth_api_v1_net_worth_get: {
+        parameters: {
+            query?: {
+                /** @description As of date (YYYY-MM-DD) */
+                as_of?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_NetWorthOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_snapshots_api_v1_net_worth_snapshots_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_list_NetWorthSnapshotOut__"];
+                };
+            };
+        };
+    };
+    create_snapshot_api_v1_net_worth_snapshots_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["NetWorthSnapshotCreate"] | null;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_NetWorthSnapshotOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    recompute_snapshot_api_v1_net_worth_snapshots__as_of__recompute_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                as_of: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_NetWorthSnapshotOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     expenses_api_v1_reports_expenses_get: {
         parameters: {
             query?: {
@@ -3095,6 +6227,73 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_savings_target_api_v1_savings_targets_get: {
+        parameters: {
+            query?: {
+                /** @description Month in YYYY-MM format */
+                month?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_SavingsTargetOut_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_savings_target_api_v1_savings_targets__effective_from__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                effective_from: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SavingsTargetIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Envelope_SavingsTargetOut_"];
+                };
             };
             /** @description Validation Error */
             422: {

@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import uuid
 from datetime import date
+from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.core.money import MoneyOut, OptionalMoneyOut
 
@@ -105,6 +106,42 @@ class Tile(BaseModel):
     change_kind: str  # "percent" | "points"
 
 
+class PlanningTile(BaseModel):
+    value: MoneyOut
+    previous: OptionalMoneyOut = None
+    change: OptionalMoneyOut = None
+    change_kind: str = "percent"
+
+
+class SavingsTargetDashboardTile(BaseModel):
+    configured: bool
+    target_amount: OptionalMoneyOut = None
+    actual_savings: OptionalMoneyOut = None
+    achievement_pct: OptionalMoneyOut = None
+    shortfall: OptionalMoneyOut = None
+
+
+class NetWorthPoint(BaseModel):
+    as_of: date
+    net_worth: MoneyOut
+    total_assets: MoneyOut
+    total_liabilities: MoneyOut
+
+
+class LoanTrendPoint(BaseModel):
+    month: str
+    total_outstanding: MoneyOut
+
+
+class BudgetAlertDashboardItem(BaseModel):
+    category_id: uuid.UUID | None
+    category_name: str
+    budgeted: MoneyOut
+    spent: MoneyOut
+    utilization_pct: MoneyOut
+    threshold_crossed: int
+
+
 class Overview(BaseModel):
     period: PeriodOut
     previous_period: PeriodOut
@@ -115,6 +152,23 @@ class Overview(BaseModel):
     liquid_funds: Tile
     has_transactions: bool
     has_accounts: bool
+
+    # P1 additions:
+    net_worth: PlanningTile | None = None
+    total_assets: PlanningTile | None = None
+    total_liabilities: PlanningTile | None = None
+    outstanding_loans: PlanningTile | None = None
+    monthly_emi_commitment: PlanningTile | None = None
+    savings_target: SavingsTargetDashboardTile | None = None
+
+    # Budget status
+    budget_utilization_pct: OptionalMoneyOut = None
+    budget_alerts: list[BudgetAlertDashboardItem] = Field(default_factory=list)
+
+    # Trend series
+    net_worth_trend: list[NetWorthPoint] = Field(default_factory=list)
+    asset_allocation: list[dict[str, Any]] = Field(default_factory=list)
+    loan_trend: list[LoanTrendPoint] = Field(default_factory=list)
 
 
 class BreakdownRow(BaseModel):

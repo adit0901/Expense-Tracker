@@ -17,7 +17,7 @@ export async function register(page: Page, email = uniqueEmail(), name = 'Asha R
   return email
 }
 
-export async function addAccount(page: Page, name: string, opening = '0.00', type = 'Bank account'): Promise<void> {
+export async function addAccount(page: Page, name: string, opening = '0.00', type = 'Bank account', openingDate?: string): Promise<void> {
   await page.goto('/settings/accounts')
   await page.getByRole('button', { name: 'Add account' }).first().click()
   const dialog = page.getByRole('dialog')
@@ -27,6 +27,9 @@ export async function addAccount(page: Page, name: string, opening = '0.00', typ
     await page.getByRole('option', { name: type }).click()
   }
   await dialog.getByLabel(/Opening (balance|outstanding)/).fill(opening)
+  if (openingDate) {
+    await dialog.getByLabel('Opening date').fill(openingDate)
+  }
   await dialog.getByRole('button', { name: 'Add account' }).click()
   await expect(dialog).toBeHidden()
   await expect(page.getByText(name, { exact: true })).toBeVisible()

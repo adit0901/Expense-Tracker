@@ -30,12 +30,17 @@ def total_income(by_type: Mapping[TransactionType, Decimal]) -> Decimal:
 
 
 def total_expenses(by_type: Mapping[TransactionType, Decimal]) -> Decimal:
-    """Monthly Expenses = sum of `expense` minus sum of `refund`.
+    """Monthly Expenses = sum of `expense` minus sum of `refund`
+    plus interest portion of `loan_payment`.
 
-    Transfers (incl. credit-card bill payments), salary deductions, and later loan principal
+    Transfers (incl. credit-card bill payments), salary deductions, loan principal
     and investment purchases are not expenses and are therefore not read here.
     """
-    return by_type.get(TransactionType.expense, ZERO) - by_type.get(TransactionType.refund, ZERO)
+    return (
+        by_type.get(TransactionType.expense, ZERO)
+        - by_type.get(TransactionType.refund, ZERO)
+        + by_type.get(TransactionType.loan_payment, ZERO)
+    )
 
 
 def savings(income: Decimal, expenses: Decimal) -> Decimal:

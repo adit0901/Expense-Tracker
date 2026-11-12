@@ -19,10 +19,13 @@ dependencies = [
     "python-multipart>=0.0.33",
     "filetype>=1.2.0",
     "charset-normalizer>=3.5.2",
+    "redis>=5.0.0",
+    "arq>=0.26.0",
 ]
 
 [dependency-groups]
 dev = [
+    "fakeredis>=2.20.0",
     "httpx>=0.28.1",
     "mypy>=2.4.1",
     "pytest>=9.2.0",

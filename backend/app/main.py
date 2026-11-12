@@ -42,6 +42,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         api_limit=settings.api_rate_limit,
         max_failures=settings.login_max_failures,
         window=settings.login_window_seconds,
+        redis_url=settings.redis_url,
     )
     app.include_router(health.router)
     app.include_router(api_router)

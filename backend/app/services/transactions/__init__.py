@@ -5,6 +5,7 @@ from __future__ import annotations
 import uuid
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
+from datetime import date
 from decimal import Decimal
 from typing import Any
 
@@ -103,6 +104,13 @@ def _validate(
     counter_changed: bool,
 ) -> None:
     t: TransactionType = s["type"]
+    if t == TransactionType.loan_payment and s.get("loan_id") is None:
+        raise _err(
+            "loan_payment transactions cannot be created directly",
+            "validation_error",
+            "type",
+            "not_allowed",
+        )
     account = (
         require_active_account(db, user_id, s["account_id"])
         if account_changed
@@ -444,6 +452,11 @@ def create_transaction(db: Session, user_id: uuid.UUID, data: TransactionCreate)
     _validate(db, user_id, _state_of(data), account_changed=True, counter_changed=True)
     _raise_if_duplicate(db, user_id, data)
     t = build_transaction(db, user_id, data)
+    from app.services.budgets import evaluate_budget_alerts
+    from app.services.net_worth import mark_snapshots_stale
+
+    evaluate_budget_alerts(db, user_id, date(t.txn_date.year, t.txn_date.month, 1))
+    mark_snapshots_stale(db, user_id, t.txn_date)
     db.commit()
     return present(db, user_id, t)
 
@@ -500,6 +513,11 @@ def update_transaction(
             entity_id=t.id,
             changed_fields=changed,
         )
+    from app.services.budgets import evaluate_budget_alerts
+    from app.services.net_worth import mark_snapshots_stale
+
+    evaluate_budget_alerts(db, user_id, date(t.txn_date.year, t.txn_date.month, 1))
+    mark_snapshots_stale(db, user_id, t.txn_date)
     db.commit()
     db.refresh(t)
     return present(db, user_id, t)
@@ -528,6 +546,16 @@ def delete_transactions(db: Session, user_id: uuid.UUID, txns: list[Transaction]
             db, actor_user_id=user_id, action="delete", entity_type="transaction", entity_id=t.id
         )
         db.delete(t)
+    db.flush()
+    from app.services.budgets import evaluate_budget_alerts
+    from app.services.net_worth import mark_snapshots_stale
+
+    months = {date(t.txn_date.year, t.txn_date.month, 1) for t in txns}
+    for m in months:
+        evaluate_budget_alerts(db, user_id, m)
+    if txns:
+        min_date = min(t.txn_date for t in txns)
+        mark_snapshots_stale(db, user_id, min_date)
     db.info.setdefault("post_commit", []).extend(post)
 
 

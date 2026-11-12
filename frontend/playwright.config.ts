@@ -35,19 +35,19 @@ export default defineConfig({
     {
       command: 'mailpit --smtp 127.0.0.1:1025 --listen 127.0.0.1:8025',
       url: 'http://localhost:8025/api/v1/info',
-      reuseExistingServer: false,
+      reuseExistingServer: !process.env.CI,
     },
     {
       command: `sh -c "cd ../backend && env ${backendEnv} uv run alembic upgrade head && env ${backendEnv} uv run uvicorn app.main:app --port ${API_PORT} --no-access-log 2>&1 | tee ../.local/e2e-backend.log"`,
       url: `http://localhost:${API_PORT}/health/ready`,
-      reuseExistingServer: false,
+      reuseExistingServer: !process.env.CI,
       timeout: 120_000,
     },
     {
       command: `npm run dev -- --port ${WEB_PORT} --strictPort`,
       url: `http://localhost:${WEB_PORT}`,
       env: { VITE_API_PROXY: `http://localhost:${API_PORT}` },
-      reuseExistingServer: false,
+      reuseExistingServer: !process.env.CI,
     },
   ],
 })

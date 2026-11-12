@@ -111,6 +111,41 @@ export function overview(overrides: Partial<Overview> = {}): Overview {
     liquid_funds: tile('120000.00', '0.00', null),
     has_transactions: true,
     has_accounts: true,
+    net_worth: { value: '2500000.00', previous: null, change: null, change_kind: 'percent' },
+    total_assets: { value: '3500000.00', previous: null, change: null, change_kind: 'percent' },
+    total_liabilities: { value: '1000000.00', previous: null, change: null, change_kind: 'percent' },
+    outstanding_loans: { value: '921151.21', previous: null, change: null, change_kind: 'percent' },
+    monthly_emi_commitment: { value: '88848.79', previous: null, change: null, change_kind: 'percent' },
+    savings_target: {
+      configured: true,
+      target_amount: '30000.00',
+      actual_savings: '36000.00',
+      achievement_pct: '120.00',
+      shortfall: '0.00',
+    },
+    budget_utilization_pct: '75.00',
+    budget_alerts: [
+      {
+        category_id: 'cat-food',
+        category_name: 'Food',
+        budgeted: '12000.00',
+        spent: '13500.00',
+        utilization_pct: '112.50',
+        threshold_crossed: 100,
+      },
+    ],
+    net_worth_trend: [
+      { as_of: '2026-10-31', net_worth: '2400000.00', total_assets: '3400000.00', total_liabilities: '1000000.00' },
+      { as_of: '2026-11-30', net_worth: '2500000.00', total_assets: '3500000.00', total_liabilities: '1000000.00' },
+    ],
+    asset_allocation: [
+      { category: 'Bank & Cash', amount: '120000.00', share_pct: '3.43' },
+      { category: 'Real Estate', amount: '3380000.00', share_pct: '96.57' },
+    ],
+    loan_trend: [
+      { month: '2026-10', total_outstanding: '950000.00' },
+      { month: '2026-11', total_outstanding: '921151.21' },
+    ],
     ...overrides,
   }
 }

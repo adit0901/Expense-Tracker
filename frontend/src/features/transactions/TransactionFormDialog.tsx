@@ -65,8 +65,9 @@ const FIELDS = ['type', 'account_id', 'counter_account_id', 'category_id', 'paym
   'amount', 'txn_date', 'payee', 'description', 'notes', 'tags'] as const
 
 function toValues(t?: TransactionOut, defaults: Partial<TxnFormValues> = {}): TxnFormValues {
+  const resolvedType = t?.type === 'loan_payment' ? 'expense' : t?.type
   return {
-    type: t?.type ?? 'expense',
+    type: resolvedType ?? 'expense',
     account_id: t?.account_id ?? '',
     counter_account_id: t?.counter_account_id ?? '',
     category_id: t?.category_id ?? '',

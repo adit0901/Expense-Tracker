@@ -23,6 +23,7 @@ SOURCE_SIGN: dict[TransactionType, int] = {
     TransactionType.expense: -1,
     TransactionType.refund: 1,
     TransactionType.transfer: -1,
+    TransactionType.loan_payment: -1,
 }
 # Effect on `counter_account_id` (only transfers have one), for asset accounts.
 COUNTER_SIGN: dict[TransactionType, int] = {TransactionType.transfer: 1}

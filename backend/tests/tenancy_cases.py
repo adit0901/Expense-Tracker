@@ -148,3 +148,190 @@ register_case(
         list_path="/api/v1/income-sources?include_inactive=true",
     )
 )
+
+
+def _budget(u: AuthedUser) -> str:
+    from tests.factories import cat_id
+
+    c = cat_id(u, "Food")
+    res = data(
+        u.put(
+            "/api/v1/budgets/2026-11",
+            json={
+                "overall_amount": "50000.00",
+                "lines": [{"category_id": c, "amount": "10000.00"}],
+            },
+        )
+    )
+    return str(res["id"])
+
+
+register_case(
+    OwnedCase(
+        name="budget",
+        create=_budget,
+        probes=[
+            Probe("GET", "/api/v1/budgets?month=2026-11"),
+        ],
+    )
+)
+
+
+def _goal(u: AuthedUser) -> str:
+    res = data(
+        u.post(
+            "/api/v1/goals",
+            json={
+                "name": "Secret Vacation",
+                "type": "vacation",
+                "target_amount": "50000.00",
+            },
+        )
+    )
+    return str(res["id"])
+
+
+register_case(
+    OwnedCase(
+        name="goal",
+        create=_goal,
+        probes=[
+            Probe("GET", "/api/v1/goals/{id}"),
+            Probe("PATCH", "/api/v1/goals/{id}", json={"name": "Hijacked"}),
+            Probe("DELETE", "/api/v1/goals/{id}"),
+            Probe("GET", "/api/v1/goals/{id}/contributions"),
+            Probe(
+                "POST",
+                "/api/v1/goals/{id}/contributions",
+                json={"amount": "1000.00", "date": "2026-11-01"},
+            ),
+        ],
+        list_path="/api/v1/goals",
+    )
+)
+
+
+def _asset(u: AuthedUser) -> str:
+    res = data(
+        u.post(
+            "/api/v1/assets",
+            json={
+                "name": "Secret Gold",
+                "type": "gold",
+                "current_value": "100000.00",
+            },
+        )
+    )
+    return str(res["id"])
+
+
+register_case(
+    OwnedCase(
+        name="asset",
+        create=_asset,
+        probes=[
+            Probe("GET", "/api/v1/assets/{id}"),
+            Probe("PATCH", "/api/v1/assets/{id}", json={"name": "Hijacked"}),
+            Probe("POST", "/api/v1/assets/{id}/close", json={"closed_at": "2026-12-31"}),
+            Probe("GET", "/api/v1/assets/{id}/valuations"),
+            Probe(
+                "POST",
+                "/api/v1/assets/{id}/valuations",
+                json={"as_of": "2026-11-01", "value": "110000.00"},
+            ),
+        ],
+        list_path="/api/v1/assets",
+    )
+)
+
+
+def _liability(u: AuthedUser) -> str:
+    res = data(
+        u.post(
+            "/api/v1/liabilities",
+            json={
+                "name": "Secret Debt",
+                "current_balance": "50000.00",
+            },
+        )
+    )
+    return str(res["id"])
+
+
+register_case(
+    OwnedCase(
+        name="liability",
+        create=_liability,
+        probes=[
+            Probe("GET", "/api/v1/liabilities/{id}"),
+            Probe("PATCH", "/api/v1/liabilities/{id}", json={"name": "Hijacked"}),
+            Probe("POST", "/api/v1/liabilities/{id}/close", json={"closed_at": "2026-12-31"}),
+            Probe("GET", "/api/v1/liabilities/{id}/balances"),
+            Probe(
+                "POST",
+                "/api/v1/liabilities/{id}/balances",
+                json={"as_of": "2026-11-01", "balance": "40000.00"},
+            ),
+        ],
+        list_path="/api/v1/liabilities",
+    )
+)
+
+
+def _loan(u: AuthedUser) -> str:
+    res = data(
+        u.post(
+            "/api/v1/loans",
+            json={
+                "type": "personal",
+                "lender": "Secret Bank",
+                "original_principal": "100000.00",
+                "annual_rate": "10.0",
+                "tenure_months": 12,
+                "start_date": "2026-11-01",
+            },
+        )
+    )
+    return str(res["id"])
+
+
+register_case(
+    OwnedCase(
+        name="loan",
+        create=_loan,
+        probes=[
+            Probe("GET", "/api/v1/loans/{id}"),
+            Probe("PATCH", "/api/v1/loans/{id}", json={"lender": "Hijacked"}),
+            Probe("DELETE", "/api/v1/loans/{id}"),
+            Probe("GET", "/api/v1/loans/{id}/schedule"),
+            Probe(
+                "POST",
+                "/api/v1/loans/{id}/simulate",
+                json={
+                    "kind": "rate_change",
+                    "effective_date": "2026-12-01",
+                    "annual_rate": "12.0",
+                    "strategy": "keep_tenure",
+                },
+            ),
+        ],
+        list_path="/api/v1/loans",
+    )
+)
+
+
+def _net_worth_snapshot(u: AuthedUser) -> str:
+    res = data(u.post("/api/v1/net-worth/snapshots", json={"as_of": "2026-11-01"}))
+    return str(res["as_of"])
+
+
+register_case(
+    OwnedCase(
+        name="net_worth_snapshot",
+        create=_net_worth_snapshot,
+        probes=[
+            Probe("POST", "/api/v1/net-worth/snapshots/{id}/recompute"),
+        ],
+        list_path="/api/v1/net-worth/snapshots",
+    )
+)

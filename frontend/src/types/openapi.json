@@ -301,6 +301,273 @@
         "title": "AccountsSummary",
         "type": "object"
       },
+      "AssetCloseIn": {
+        "properties": {
+          "closed_at": {
+            "format": "date",
+            "title": "Closed At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "closed_at"
+        ],
+        "title": "AssetCloseIn",
+        "type": "object"
+      },
+      "AssetCreate": {
+        "properties": {
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "As Of"
+          },
+          "current_value": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Current Value"
+          },
+          "details": {
+            "additionalProperties": true,
+            "title": "Details",
+            "type": "object"
+          },
+          "is_liquid": {
+            "default": false,
+            "title": "Is Liquid",
+            "type": "boolean"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "name",
+          "current_value"
+        ],
+        "title": "AssetCreate",
+        "type": "object"
+      },
+      "AssetOut": {
+        "properties": {
+          "closed_at": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closed At"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_value": {
+            "title": "Current Value",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": true,
+            "title": "Details",
+            "type": "object"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_liquid": {
+            "title": "Is Liquid",
+            "type": "boolean"
+          },
+          "latest_valuation_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Valuation Date"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AssetType"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "name",
+          "is_liquid",
+          "details",
+          "current_value",
+          "latest_valuation_date",
+          "closed_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "AssetOut",
+        "type": "object"
+      },
+      "AssetType": {
+        "enum": [
+          "fixed_deposit",
+          "gold",
+          "real_estate",
+          "ppf",
+          "epf",
+          "nps",
+          "mutual_fund",
+          "vehicle",
+          "other"
+        ],
+        "title": "AssetType",
+        "type": "string"
+      },
+      "AssetUpdate": {
+        "properties": {
+          "details": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          },
+          "is_liquid": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Liquid"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          }
+        },
+        "title": "AssetUpdate",
+        "type": "object"
+      },
+      "AssetValuationIn": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "as_of",
+          "value"
+        ],
+        "title": "AssetValuationIn",
+        "type": "object"
+      },
+      "AssetValuationOut": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "asset_id": {
+            "format": "uuid",
+            "title": "Asset Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "asset_id",
+          "as_of",
+          "value",
+          "created_at"
+        ],
+        "title": "AssetValuationOut",
+        "type": "object"
+      },
       "AttachmentOut": {
         "properties": {
           "created_at": {
@@ -387,6 +654,29 @@
         "title": "Body_upload_import_api_v1_imports_post",
         "type": "object"
       },
+      "BreakdownItemOut": {
+        "properties": {
+          "amount": {
+            "title": "Amount",
+            "type": "string"
+          },
+          "category": {
+            "title": "Category",
+            "type": "string"
+          },
+          "share_pct": {
+            "title": "Share Pct",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "amount",
+          "share_pct"
+        ],
+        "title": "BreakdownItemOut",
+        "type": "object"
+      },
       "BreakdownRow": {
         "properties": {
           "category_id": {
@@ -445,6 +735,398 @@
           "is_other"
         ],
         "title": "BreakdownRow",
+        "type": "object"
+      },
+      "BudgetAlertDashboardItem": {
+        "properties": {
+          "budgeted": {
+            "title": "Budgeted",
+            "type": "string"
+          },
+          "category_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Id"
+          },
+          "category_name": {
+            "title": "Category Name",
+            "type": "string"
+          },
+          "spent": {
+            "title": "Spent",
+            "type": "string"
+          },
+          "threshold_crossed": {
+            "title": "Threshold Crossed",
+            "type": "integer"
+          },
+          "utilization_pct": {
+            "title": "Utilization Pct",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category_id",
+          "category_name",
+          "budgeted",
+          "spent",
+          "utilization_pct",
+          "threshold_crossed"
+        ],
+        "title": "BudgetAlertDashboardItem",
+        "type": "object"
+      },
+      "BudgetAlertResponse": {
+        "properties": {
+          "budget_line_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Line Id"
+          },
+          "category_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Id"
+          },
+          "category_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Name"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "month": {
+            "title": "Month",
+            "type": "string"
+          },
+          "threshold": {
+            "title": "Threshold",
+            "type": "integer"
+          },
+          "triggered_at": {
+            "format": "date-time",
+            "title": "Triggered At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "month",
+          "threshold",
+          "triggered_at"
+        ],
+        "title": "BudgetAlertResponse",
+        "type": "object"
+      },
+      "BudgetComparisonResponse": {
+        "properties": {
+          "category_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Id"
+          },
+          "category_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category Name"
+          },
+          "months": {
+            "items": {
+              "$ref": "#/components/schemas/BudgetMonthComparisonItem"
+            },
+            "title": "Months",
+            "type": "array"
+          }
+        },
+        "title": "BudgetComparisonResponse",
+        "type": "object"
+      },
+      "BudgetLineInput": {
+        "properties": {
+          "alert_thresholds": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Alert Thresholds",
+            "type": "array"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Amount"
+          },
+          "category_id": {
+            "format": "uuid",
+            "title": "Category Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category_id",
+          "amount"
+        ],
+        "title": "BudgetLineInput",
+        "type": "object"
+      },
+      "BudgetLineResponse": {
+        "properties": {
+          "actual": {
+            "title": "Actual",
+            "type": "string"
+          },
+          "alert_thresholds": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Alert Thresholds",
+            "type": "array"
+          },
+          "amount": {
+            "title": "Amount",
+            "type": "string"
+          },
+          "category_id": {
+            "format": "uuid",
+            "title": "Category Id",
+            "type": "string"
+          },
+          "category_name": {
+            "title": "Category Name",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_over_budget": {
+            "title": "Is Over Budget",
+            "type": "boolean"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "remaining": {
+            "title": "Remaining",
+            "type": "string"
+          },
+          "utilization": {
+            "title": "Utilization",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "category_id",
+          "category_name",
+          "amount",
+          "alert_thresholds",
+          "actual",
+          "utilization",
+          "remaining",
+          "is_over_budget"
+        ],
+        "title": "BudgetLineResponse",
+        "type": "object"
+      },
+      "BudgetMonthComparisonItem": {
+        "properties": {
+          "actual": {
+            "title": "Actual",
+            "type": "string"
+          },
+          "budget": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget"
+          },
+          "is_over_budget": {
+            "default": false,
+            "title": "Is Over Budget",
+            "type": "boolean"
+          },
+          "month": {
+            "title": "Month",
+            "type": "string"
+          },
+          "month_label": {
+            "title": "Month Label",
+            "type": "string"
+          },
+          "remaining": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remaining"
+          },
+          "utilization": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Utilization"
+          }
+        },
+        "required": [
+          "month",
+          "month_label",
+          "actual"
+        ],
+        "title": "BudgetMonthComparisonItem",
+        "type": "object"
+      },
+      "BudgetResponse": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/BudgetLineResponse"
+            },
+            "title": "Lines",
+            "type": "array"
+          },
+          "month": {
+            "title": "Month",
+            "type": "string"
+          },
+          "overall_actual": {
+            "title": "Overall Actual",
+            "type": "string"
+          },
+          "overall_amount": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overall Amount"
+          },
+          "overall_is_over_budget": {
+            "default": false,
+            "title": "Overall Is Over Budget",
+            "type": "boolean"
+          },
+          "overall_remaining": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overall Remaining"
+          },
+          "overall_utilization": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overall Utilization"
+          },
+          "warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Warning"
+          }
+        },
+        "required": [
+          "id",
+          "month",
+          "overall_actual"
+        ],
+        "title": "BudgetResponse",
         "type": "object"
       },
       "CategoryAmount": {
@@ -907,6 +1589,36 @@
         "title": "DuplicateCheckOut",
         "type": "object"
       },
+      "EmergencyFundMetricsOut": {
+        "properties": {
+          "coverage_months": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coverage Months"
+          },
+          "essential_monthly_expenses": {
+            "title": "Essential Monthly Expenses",
+            "type": "string"
+          },
+          "liquid_savings": {
+            "title": "Liquid Savings",
+            "type": "string"
+          }
+        },
+        "required": [
+          "liquid_savings",
+          "essential_monthly_expenses",
+          "coverage_months"
+        ],
+        "title": "EmergencyFundMetricsOut",
+        "type": "object"
+      },
       "Envelope_AccountOut_": {
         "properties": {
           "data": {
@@ -941,6 +1653,40 @@
         "title": "Envelope[AccountsSummary]",
         "type": "object"
       },
+      "Envelope_AssetOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AssetOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[AssetOut]",
+        "type": "object"
+      },
+      "Envelope_AssetValuationOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AssetValuationOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[AssetValuationOut]",
+        "type": "object"
+      },
       "Envelope_AttachmentOut_": {
         "properties": {
           "data": {
@@ -956,6 +1702,40 @@
           "data"
         ],
         "title": "Envelope[AttachmentOut]",
+        "type": "object"
+      },
+      "Envelope_BudgetComparisonResponse_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BudgetComparisonResponse"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[BudgetComparisonResponse]",
+        "type": "object"
+      },
+      "Envelope_BudgetResponse_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BudgetResponse"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[BudgetResponse]",
         "type": "object"
       },
       "Envelope_CategoryBreakdown_": {
@@ -1026,6 +1806,23 @@
         "title": "Envelope[DuplicateCheckOut]",
         "type": "object"
       },
+      "Envelope_EmergencyFundMetricsOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/EmergencyFundMetricsOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[EmergencyFundMetricsOut]",
+        "type": "object"
+      },
       "Envelope_ExpenseReport_": {
         "properties": {
           "data": {
@@ -1041,6 +1838,40 @@
           "data"
         ],
         "title": "Envelope[ExpenseReport]",
+        "type": "object"
+      },
+      "Envelope_GoalContributionOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GoalContributionOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[GoalContributionOut]",
+        "type": "object"
+      },
+      "Envelope_GoalOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/GoalOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[GoalOut]",
         "type": "object"
       },
       "Envelope_ImportBatchOut_": {
@@ -1094,6 +1925,142 @@
         "title": "Envelope[IncomeSourceOut]",
         "type": "object"
       },
+      "Envelope_LiabilityBalanceOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LiabilityBalanceOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LiabilityBalanceOut]",
+        "type": "object"
+      },
+      "Envelope_LiabilityOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LiabilityOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LiabilityOut]",
+        "type": "object"
+      },
+      "Envelope_LoanEventOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LoanEventOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LoanEventOut]",
+        "type": "object"
+      },
+      "Envelope_LoanOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LoanOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LoanOut]",
+        "type": "object"
+      },
+      "Envelope_LoanPaymentOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LoanPaymentOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LoanPaymentOut]",
+        "type": "object"
+      },
+      "Envelope_LoanScheduleOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LoanScheduleOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LoanScheduleOut]",
+        "type": "object"
+      },
+      "Envelope_LoanSimulateOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LoanSimulateOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LoanSimulateOut]",
+        "type": "object"
+      },
+      "Envelope_LoanSummaryOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/LoanSummaryOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[LoanSummaryOut]",
+        "type": "object"
+      },
       "Envelope_MessageOut_": {
         "properties": {
           "data": {
@@ -1109,6 +2076,40 @@
           "data"
         ],
         "title": "Envelope[MessageOut]",
+        "type": "object"
+      },
+      "Envelope_NetWorthOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/NetWorthOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[NetWorthOut]",
+        "type": "object"
+      },
+      "Envelope_NetWorthSnapshotOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/NetWorthSnapshotOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[NetWorthSnapshotOut]",
         "type": "object"
       },
       "Envelope_Overview_": {
@@ -1143,6 +2144,23 @@
           "data"
         ],
         "title": "Envelope[PreferencesOut]",
+        "type": "object"
+      },
+      "Envelope_SavingsTargetOut_": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/SavingsTargetOut"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[SavingsTargetOut]",
         "type": "object"
       },
       "Envelope_SavingsTrend_": {
@@ -1211,6 +2229,195 @@
           "data"
         ],
         "title": "Envelope[UserOut]",
+        "type": "object"
+      },
+      "Envelope_list_AssetOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/AssetOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[AssetOut]]",
+        "type": "object"
+      },
+      "Envelope_list_AssetValuationOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/AssetValuationOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[AssetValuationOut]]",
+        "type": "object"
+      },
+      "Envelope_list_BudgetAlertResponse__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BudgetAlertResponse"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[BudgetAlertResponse]]",
+        "type": "object"
+      },
+      "Envelope_list_GoalContributionOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/GoalContributionOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[GoalContributionOut]]",
+        "type": "object"
+      },
+      "Envelope_list_GoalOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/GoalOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[GoalOut]]",
+        "type": "object"
+      },
+      "Envelope_list_LiabilityBalanceOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/LiabilityBalanceOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[LiabilityBalanceOut]]",
+        "type": "object"
+      },
+      "Envelope_list_LiabilityOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/LiabilityOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[LiabilityOut]]",
+        "type": "object"
+      },
+      "Envelope_list_LoanOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/LoanOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[LoanOut]]",
+        "type": "object"
+      },
+      "Envelope_list_NetWorthSnapshotOut__": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/NetWorthSnapshotOut"
+            },
+            "title": "Data",
+            "type": "array"
+          },
+          "meta": {
+            "additionalProperties": true,
+            "title": "Meta",
+            "type": "object"
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "Envelope[list[NetWorthSnapshotOut]]",
         "type": "object"
       },
       "ExpenseCategoryRow": {
@@ -1306,6 +2513,462 @@
           "by_payment_method"
         ],
         "title": "ExpenseReport",
+        "type": "object"
+      },
+      "GoalContributionCreate": {
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Amount"
+          },
+          "date": {
+            "format": "date",
+            "title": "Date",
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/GoalContributionKind",
+            "default": "contribution"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "transaction_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Id"
+          }
+        },
+        "required": [
+          "amount",
+          "date"
+        ],
+        "title": "GoalContributionCreate",
+        "type": "object"
+      },
+      "GoalContributionKind": {
+        "enum": [
+          "contribution",
+          "withdrawal"
+        ],
+        "title": "GoalContributionKind",
+        "type": "string"
+      },
+      "GoalContributionOut": {
+        "properties": {
+          "amount": {
+            "title": "Amount",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "date": {
+            "format": "date",
+            "title": "Date",
+            "type": "string"
+          },
+          "goal_id": {
+            "format": "uuid",
+            "title": "Goal Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/GoalContributionKind"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "transaction_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Id"
+          }
+        },
+        "required": [
+          "id",
+          "goal_id",
+          "kind",
+          "amount",
+          "date",
+          "transaction_id",
+          "notes",
+          "created_at"
+        ],
+        "title": "GoalContributionOut",
+        "type": "object"
+      },
+      "GoalCreate": {
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "starting_amount": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "default": "0.00",
+            "title": "Starting Amount"
+          },
+          "target_amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Target Amount"
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date"
+          },
+          "type": {
+            "$ref": "#/components/schemas/GoalType"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "target_amount"
+        ],
+        "title": "GoalCreate",
+        "type": "object"
+      },
+      "GoalOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_amount": {
+            "title": "Current Amount",
+            "type": "string"
+          },
+          "estimated_completion_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimated Completion Date"
+          },
+          "estimated_completion_label": {
+            "title": "Estimated Completion Label",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_achieved": {
+            "title": "Is Achieved",
+            "type": "boolean"
+          },
+          "is_overdue": {
+            "title": "Is Overdue",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "progress_pct": {
+            "title": "Progress Pct",
+            "type": "string"
+          },
+          "remaining_amount": {
+            "title": "Remaining Amount",
+            "type": "string"
+          },
+          "required_monthly_contribution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Required Monthly Contribution"
+          },
+          "starting_amount": {
+            "title": "Starting Amount",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/GoalStatus"
+          },
+          "target_amount": {
+            "title": "Target Amount",
+            "type": "string"
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date"
+          },
+          "type": {
+            "$ref": "#/components/schemas/GoalType"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "target_amount",
+          "target_date",
+          "starting_amount",
+          "status",
+          "notes",
+          "current_amount",
+          "progress_pct",
+          "remaining_amount",
+          "required_monthly_contribution",
+          "estimated_completion_date",
+          "estimated_completion_label",
+          "is_overdue",
+          "is_achieved",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "GoalOut",
+        "type": "object"
+      },
+      "GoalStatus": {
+        "enum": [
+          "active",
+          "paused",
+          "completed",
+          "archived"
+        ],
+        "title": "GoalStatus",
+        "type": "string"
+      },
+      "GoalType": {
+        "enum": [
+          "emergency_fund",
+          "vacation",
+          "house",
+          "vehicle",
+          "education",
+          "retirement",
+          "other"
+        ],
+        "title": "GoalType",
+        "type": "string"
+      },
+      "GoalUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GoalStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "target_amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Amount"
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GoalType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "GoalUpdate",
+        "type": "object"
+      },
+      "GrowthOut": {
+        "properties": {
+          "amount_change": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Change"
+          },
+          "percentage_change": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentage Change"
+          }
+        },
+        "title": "GrowthOut",
         "type": "object"
       },
       "HTTPValidationError": {
@@ -1843,6 +3506,1138 @@
         "title": "IncomeSourceUpdate",
         "type": "object"
       },
+      "InstallmentOut": {
+        "properties": {
+          "closing_outstanding": {
+            "title": "Closing Outstanding",
+            "type": "string"
+          },
+          "due_date": {
+            "format": "date",
+            "title": "Due Date",
+            "type": "string"
+          },
+          "installment_no": {
+            "title": "Installment No",
+            "type": "integer"
+          },
+          "interest": {
+            "title": "Interest",
+            "type": "string"
+          },
+          "is_paid": {
+            "title": "Is Paid",
+            "type": "boolean"
+          },
+          "paid_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paid Date"
+          },
+          "payment": {
+            "title": "Payment",
+            "type": "string"
+          },
+          "principal": {
+            "title": "Principal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "installment_no",
+          "due_date",
+          "payment",
+          "principal",
+          "interest",
+          "closing_outstanding",
+          "is_paid"
+        ],
+        "title": "InstallmentOut",
+        "type": "object"
+      },
+      "LiabilityBalanceIn": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "balance": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Balance"
+          }
+        },
+        "required": [
+          "as_of",
+          "balance"
+        ],
+        "title": "LiabilityBalanceIn",
+        "type": "object"
+      },
+      "LiabilityBalanceOut": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "balance": {
+            "title": "Balance",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "liability_id": {
+            "format": "uuid",
+            "title": "Liability Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "liability_id",
+          "as_of",
+          "balance",
+          "created_at"
+        ],
+        "title": "LiabilityBalanceOut",
+        "type": "object"
+      },
+      "LiabilityCloseIn": {
+        "properties": {
+          "closed_at": {
+            "format": "date",
+            "title": "Closed At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "closed_at"
+        ],
+        "title": "LiabilityCloseIn",
+        "type": "object"
+      },
+      "LiabilityCreate": {
+        "properties": {
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "As Of"
+          },
+          "current_balance": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Current Balance"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "required": [
+          "name",
+          "current_balance"
+        ],
+        "title": "LiabilityCreate",
+        "type": "object"
+      },
+      "LiabilityOut": {
+        "properties": {
+          "closed_at": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closed At"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_balance": {
+            "title": "Current Balance",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "latest_balance_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Balance Date"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "current_balance",
+          "latest_balance_date",
+          "notes",
+          "closed_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "LiabilityOut",
+        "type": "object"
+      },
+      "LiabilityUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "title": "LiabilityUpdate",
+        "type": "object"
+      },
+      "LoanCreate": {
+        "properties": {
+          "annual_rate": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Annual Rate"
+          },
+          "baseline_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Baseline Date"
+          },
+          "baseline_outstanding": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Baseline Outstanding"
+          },
+          "emi_amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emi Amount"
+          },
+          "first_emi_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Emi Date"
+          },
+          "lender": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Lender",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "original_principal": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Original Principal"
+          },
+          "start_date": {
+            "format": "date",
+            "title": "Start Date",
+            "type": "string"
+          },
+          "tenure_months": {
+            "exclusiveMinimum": 0.0,
+            "title": "Tenure Months",
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/LoanType"
+          }
+        },
+        "required": [
+          "type",
+          "lender",
+          "original_principal",
+          "annual_rate",
+          "tenure_months",
+          "start_date"
+        ],
+        "title": "LoanCreate",
+        "type": "object"
+      },
+      "LoanEventCreate": {
+        "properties": {
+          "effective_date": {
+            "format": "date",
+            "title": "Effective Date",
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/LoanEventKind"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "title": "Payload",
+            "type": "object"
+          }
+        },
+        "required": [
+          "kind",
+          "effective_date"
+        ],
+        "title": "LoanEventCreate",
+        "type": "object"
+      },
+      "LoanEventKind": {
+        "enum": [
+          "rate_change",
+          "prepayment",
+          "emi_override"
+        ],
+        "title": "LoanEventKind",
+        "type": "string"
+      },
+      "LoanEventOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "effective_date": {
+            "format": "date",
+            "title": "Effective Date",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/LoanEventKind"
+          },
+          "loan_id": {
+            "format": "uuid",
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "payload": {
+            "additionalProperties": true,
+            "title": "Payload",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "loan_id",
+          "kind",
+          "effective_date",
+          "payload",
+          "created_at"
+        ],
+        "title": "LoanEventOut",
+        "type": "object"
+      },
+      "LoanOut": {
+        "properties": {
+          "annual_rate": {
+            "title": "Annual Rate",
+            "type": "string"
+          },
+          "baseline_date": {
+            "format": "date",
+            "title": "Baseline Date",
+            "type": "string"
+          },
+          "baseline_outstanding": {
+            "title": "Baseline Outstanding",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_outstanding": {
+            "title": "Current Outstanding",
+            "type": "string"
+          },
+          "emi_amount": {
+            "title": "Emi Amount",
+            "type": "string"
+          },
+          "emi_overridden": {
+            "title": "Emi Overridden",
+            "type": "boolean"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "first_emi_date": {
+            "format": "date",
+            "title": "First Emi Date",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "lender": {
+            "title": "Lender",
+            "type": "string"
+          },
+          "next_emi_amount": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Emi Amount"
+          },
+          "next_emi_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Emi Date"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "original_principal": {
+            "title": "Original Principal",
+            "type": "string"
+          },
+          "paid_interest": {
+            "title": "Paid Interest",
+            "type": "string"
+          },
+          "paid_principal": {
+            "title": "Paid Principal",
+            "type": "string"
+          },
+          "remaining_installments": {
+            "title": "Remaining Installments",
+            "type": "integer"
+          },
+          "remaining_interest": {
+            "title": "Remaining Interest",
+            "type": "string"
+          },
+          "start_date": {
+            "format": "date",
+            "title": "Start Date",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/LoanStatus"
+          },
+          "tenure_months": {
+            "title": "Tenure Months",
+            "type": "integer"
+          },
+          "type": {
+            "$ref": "#/components/schemas/LoanType"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "lender",
+          "original_principal",
+          "annual_rate",
+          "tenure_months",
+          "start_date",
+          "first_emi_date",
+          "emi_amount",
+          "emi_overridden",
+          "baseline_outstanding",
+          "baseline_date",
+          "current_outstanding",
+          "paid_principal",
+          "paid_interest",
+          "remaining_interest",
+          "remaining_installments",
+          "next_emi_date",
+          "next_emi_amount",
+          "end_date",
+          "status",
+          "notes",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "LoanOut",
+        "type": "object"
+      },
+      "LoanPaymentCreate": {
+        "properties": {
+          "account_id": {
+            "format": "uuid",
+            "title": "Account Id",
+            "type": "string"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "installment_no": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installment No"
+          },
+          "interest_component": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Component"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "payment_date": {
+            "format": "date",
+            "title": "Payment Date",
+            "type": "string"
+          },
+          "payment_type": {
+            "default": "installment",
+            "enum": [
+              "installment",
+              "prepayment"
+            ],
+            "title": "Payment Type",
+            "type": "string"
+          },
+          "principal_component": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Principal Component"
+          },
+          "strategy": {
+            "anyOf": [
+              {
+                "enum": [
+                  "reduce_tenure",
+                  "reduce_emi"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Strategy"
+          }
+        },
+        "required": [
+          "account_id",
+          "payment_date"
+        ],
+        "title": "LoanPaymentCreate",
+        "type": "object"
+      },
+      "LoanPaymentOut": {
+        "properties": {
+          "account_id": {
+            "format": "uuid",
+            "title": "Account Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_outstanding": {
+            "title": "Current Outstanding",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "installment_no": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installment No"
+          },
+          "interest": {
+            "title": "Interest",
+            "type": "string"
+          },
+          "loan_id": {
+            "format": "uuid",
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "payment_date": {
+            "format": "date",
+            "title": "Payment Date",
+            "type": "string"
+          },
+          "principal": {
+            "title": "Principal",
+            "type": "string"
+          },
+          "total_amount": {
+            "title": "Total Amount",
+            "type": "string"
+          },
+          "transaction_id": {
+            "format": "uuid",
+            "title": "Transaction Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "loan_id",
+          "transaction_id",
+          "account_id",
+          "installment_no",
+          "payment_date",
+          "principal",
+          "interest",
+          "total_amount",
+          "current_outstanding",
+          "created_at"
+        ],
+        "title": "LoanPaymentOut",
+        "type": "object"
+      },
+      "LoanScheduleOut": {
+        "properties": {
+          "emi": {
+            "title": "Emi",
+            "type": "string"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "installments": {
+            "items": {
+              "$ref": "#/components/schemas/InstallmentOut"
+            },
+            "title": "Installments",
+            "type": "array"
+          },
+          "loan_id": {
+            "format": "uuid",
+            "title": "Loan Id",
+            "type": "string"
+          },
+          "total_interest": {
+            "title": "Total Interest",
+            "type": "string"
+          },
+          "total_principal": {
+            "title": "Total Principal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loan_id",
+          "installments",
+          "total_interest",
+          "total_principal",
+          "emi",
+          "end_date"
+        ],
+        "title": "LoanScheduleOut",
+        "type": "object"
+      },
+      "LoanSimulateOut": {
+        "properties": {
+          "current_emi": {
+            "title": "Current Emi",
+            "type": "string"
+          },
+          "current_end_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current End Date"
+          },
+          "current_tenure_months": {
+            "title": "Current Tenure Months",
+            "type": "integer"
+          },
+          "current_total_interest": {
+            "title": "Current Total Interest",
+            "type": "string"
+          },
+          "interest_saved": {
+            "title": "Interest Saved",
+            "type": "string"
+          },
+          "simulated_emi": {
+            "title": "Simulated Emi",
+            "type": "string"
+          },
+          "simulated_end_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Simulated End Date"
+          },
+          "simulated_tenure_months": {
+            "title": "Simulated Tenure Months",
+            "type": "integer"
+          },
+          "simulated_total_interest": {
+            "title": "Simulated Total Interest",
+            "type": "string"
+          },
+          "tenure_months_saved": {
+            "title": "Tenure Months Saved",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "current_total_interest",
+          "current_emi",
+          "current_tenure_months",
+          "current_end_date",
+          "simulated_total_interest",
+          "simulated_emi",
+          "simulated_tenure_months",
+          "simulated_end_date",
+          "interest_saved",
+          "tenure_months_saved"
+        ],
+        "title": "LoanSimulateOut",
+        "type": "object"
+      },
+      "LoanSimulateRequest": {
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "annual_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Annual Rate"
+          },
+          "effective_date": {
+            "format": "date",
+            "title": "Effective Date",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "one_time_prepayment",
+              "extra_monthly_payment",
+              "rate_change"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "strategy": {
+            "anyOf": [
+              {
+                "enum": [
+                  "reduce_tenure",
+                  "reduce_emi",
+                  "keep_emi",
+                  "keep_tenure"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Strategy"
+          }
+        },
+        "required": [
+          "kind",
+          "effective_date"
+        ],
+        "title": "LoanSimulateRequest",
+        "type": "object"
+      },
+      "LoanStatus": {
+        "enum": [
+          "active",
+          "closed"
+        ],
+        "title": "LoanStatus",
+        "type": "string"
+      },
+      "LoanSummaryOut": {
+        "properties": {
+          "active_loans_count": {
+            "title": "Active Loans Count",
+            "type": "integer"
+          },
+          "total_monthly_emi_commitment": {
+            "title": "Total Monthly Emi Commitment",
+            "type": "string"
+          },
+          "total_outstanding": {
+            "title": "Total Outstanding",
+            "type": "string"
+          }
+        },
+        "required": [
+          "total_outstanding",
+          "total_monthly_emi_commitment",
+          "active_loans_count"
+        ],
+        "title": "LoanSummaryOut",
+        "type": "object"
+      },
+      "LoanTrendPoint": {
+        "properties": {
+          "month": {
+            "title": "Month",
+            "type": "string"
+          },
+          "total_outstanding": {
+            "title": "Total Outstanding",
+            "type": "string"
+          }
+        },
+        "required": [
+          "month",
+          "total_outstanding"
+        ],
+        "title": "LoanTrendPoint",
+        "type": "object"
+      },
+      "LoanType": {
+        "enum": [
+          "home",
+          "car",
+          "personal",
+          "education",
+          "other"
+        ],
+        "title": "LoanType",
+        "type": "string"
+      },
+      "LoanUpdate": {
+        "properties": {
+          "lender": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lender"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LoanStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "LoanUpdate",
+        "type": "object"
+      },
       "LoginIn": {
         "properties": {
           "email": {
@@ -1974,8 +4769,208 @@
         "title": "MonthIncome",
         "type": "object"
       },
+      "NetWorthOut": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "asset_breakdown": {
+            "items": {
+              "$ref": "#/components/schemas/BreakdownItemOut"
+            },
+            "title": "Asset Breakdown",
+            "type": "array"
+          },
+          "is_stale": {
+            "default": false,
+            "title": "Is Stale",
+            "type": "boolean"
+          },
+          "liability_breakdown": {
+            "items": {
+              "$ref": "#/components/schemas/BreakdownItemOut"
+            },
+            "title": "Liability Breakdown",
+            "type": "array"
+          },
+          "liquid_assets": {
+            "title": "Liquid Assets",
+            "type": "string"
+          },
+          "mom_growth": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GrowthOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "net_worth": {
+            "title": "Net Worth",
+            "type": "string"
+          },
+          "total_assets": {
+            "title": "Total Assets",
+            "type": "string"
+          },
+          "total_liabilities": {
+            "title": "Total Liabilities",
+            "type": "string"
+          },
+          "yoy_growth": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GrowthOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "as_of",
+          "total_assets",
+          "total_liabilities",
+          "net_worth",
+          "liquid_assets",
+          "asset_breakdown",
+          "liability_breakdown"
+        ],
+        "title": "NetWorthOut",
+        "type": "object"
+      },
+      "NetWorthPoint": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "net_worth": {
+            "title": "Net Worth",
+            "type": "string"
+          },
+          "total_assets": {
+            "title": "Total Assets",
+            "type": "string"
+          },
+          "total_liabilities": {
+            "title": "Total Liabilities",
+            "type": "string"
+          }
+        },
+        "required": [
+          "as_of",
+          "net_worth",
+          "total_assets",
+          "total_liabilities"
+        ],
+        "title": "NetWorthPoint",
+        "type": "object"
+      },
+      "NetWorthSnapshotCreate": {
+        "properties": {
+          "as_of": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "As Of"
+          }
+        },
+        "title": "NetWorthSnapshotCreate",
+        "type": "object"
+      },
+      "NetWorthSnapshotOut": {
+        "properties": {
+          "as_of": {
+            "format": "date",
+            "title": "As Of",
+            "type": "string"
+          },
+          "breakdown": {
+            "additionalProperties": true,
+            "title": "Breakdown",
+            "type": "object"
+          },
+          "computed_at": {
+            "format": "date-time",
+            "title": "Computed At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_stale": {
+            "title": "Is Stale",
+            "type": "boolean"
+          },
+          "net_worth": {
+            "title": "Net Worth",
+            "type": "string"
+          },
+          "total_assets": {
+            "title": "Total Assets",
+            "type": "string"
+          },
+          "total_liabilities": {
+            "title": "Total Liabilities",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "as_of",
+          "total_assets",
+          "total_liabilities",
+          "net_worth",
+          "breakdown",
+          "computed_at",
+          "is_stale"
+        ],
+        "title": "NetWorthSnapshotOut",
+        "type": "object"
+      },
       "Overview": {
         "properties": {
+          "asset_allocation": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Asset Allocation",
+            "type": "array"
+          },
+          "budget_alerts": {
+            "items": {
+              "$ref": "#/components/schemas/BudgetAlertDashboardItem"
+            },
+            "title": "Budget Alerts",
+            "type": "array"
+          },
+          "budget_utilization_pct": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Utilization Pct"
+          },
           "expenses": {
             "$ref": "#/components/schemas/Tile"
           },
@@ -1993,6 +4988,50 @@
           "liquid_funds": {
             "$ref": "#/components/schemas/Tile"
           },
+          "loan_trend": {
+            "items": {
+              "$ref": "#/components/schemas/LoanTrendPoint"
+            },
+            "title": "Loan Trend",
+            "type": "array"
+          },
+          "monthly_emi_commitment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanningTile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "net_worth": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanningTile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "net_worth_trend": {
+            "items": {
+              "$ref": "#/components/schemas/NetWorthPoint"
+            },
+            "title": "Net Worth Trend",
+            "type": "array"
+          },
+          "outstanding_loans": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanningTile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "period": {
             "$ref": "#/components/schemas/PeriodOut"
           },
@@ -2004,6 +5043,36 @@
           },
           "savings_rate": {
             "$ref": "#/components/schemas/Tile"
+          },
+          "savings_target": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SavingsTargetDashboardTile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_assets": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanningTile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_liabilities": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlanningTile"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
@@ -2195,6 +5264,46 @@
           "granularity"
         ],
         "title": "PeriodOut",
+        "type": "object"
+      },
+      "PlanningTile": {
+        "properties": {
+          "change": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change"
+          },
+          "change_kind": {
+            "default": "percent",
+            "title": "Change Kind",
+            "type": "string"
+          },
+          "previous": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous"
+          },
+          "value": {
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "value"
+        ],
+        "title": "PlanningTile",
         "type": "object"
       },
       "PreferencesOut": {
@@ -2592,6 +5701,140 @@
         "title": "SalarySummary",
         "type": "object"
       },
+      "SavingsTargetDashboardTile": {
+        "properties": {
+          "achievement_pct": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Achievement Pct"
+          },
+          "actual_savings": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Savings"
+          },
+          "configured": {
+            "title": "Configured",
+            "type": "boolean"
+          },
+          "shortfall": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shortfall"
+          },
+          "target_amount": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Amount"
+          }
+        },
+        "required": [
+          "configured"
+        ],
+        "title": "SavingsTargetDashboardTile",
+        "type": "object"
+      },
+      "SavingsTargetIn": {
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Amount"
+          }
+        },
+        "required": [
+          "amount"
+        ],
+        "title": "SavingsTargetIn",
+        "type": "object"
+      },
+      "SavingsTargetOut": {
+        "properties": {
+          "achievement_pct": {
+            "title": "Achievement Pct",
+            "type": "string"
+          },
+          "actual_savings": {
+            "title": "Actual Savings",
+            "type": "string"
+          },
+          "effective_from": {
+            "format": "date",
+            "title": "Effective From",
+            "type": "string"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "is_achieved": {
+            "title": "Is Achieved",
+            "type": "boolean"
+          },
+          "month": {
+            "title": "Month",
+            "type": "string"
+          },
+          "shortfall": {
+            "title": "Shortfall",
+            "type": "string"
+          },
+          "target_amount": {
+            "title": "Target Amount",
+            "type": "string"
+          }
+        },
+        "required": [
+          "month",
+          "effective_from",
+          "target_amount",
+          "actual_savings",
+          "achievement_pct",
+          "shortfall",
+          "is_achieved"
+        ],
+        "title": "SavingsTargetOut",
+        "type": "object"
+      },
       "SavingsTrend": {
         "properties": {
           "months": {
@@ -2610,6 +5853,34 @@
           "months"
         ],
         "title": "SavingsTrend",
+        "type": "object"
+      },
+      "SetBudgetRequest": {
+        "properties": {
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/BudgetLineInput"
+            },
+            "title": "Lines",
+            "type": "array"
+          },
+          "overall_amount": {
+            "anyOf": [
+              {
+                "exclusiveMinimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overall Amount"
+          }
+        },
+        "title": "SetBudgetRequest",
         "type": "object"
       },
       "SourceTotal": {
@@ -3262,7 +6533,8 @@
           "income",
           "expense",
           "transfer",
-          "refund"
+          "refund",
+          "loan_payment"
         ],
         "title": "TransactionType",
         "type": "string"
@@ -3944,6 +7216,398 @@
         ]
       }
     },
+    "/api/v1/assets": {
+      "get": {
+        "operationId": "list_assets_api_v1_assets_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "as_of",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_closed",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Closed",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_AssetOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Assets",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      },
+      "post": {
+        "operationId": "create_asset_api_v1_assets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_AssetOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create Asset",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}": {
+      "get": {
+        "operationId": "get_asset_api_v1_assets__id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "as_of",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_AssetOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Asset",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      },
+      "patch": {
+        "operationId": "update_asset_api_v1_assets__id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_AssetOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Update Asset",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}/close": {
+      "post": {
+        "operationId": "close_asset_api_v1_assets__id__close_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetCloseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_AssetOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Close Asset",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/assets/{id}/valuations": {
+      "get": {
+        "operationId": "list_valuations_api_v1_assets__id__valuations_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_AssetValuationOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Valuations",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      },
+      "post": {
+        "operationId": "add_valuation_api_v1_assets__id__valuations_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetValuationIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_AssetValuationOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Add Valuation",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
     "/api/v1/attachments/{attachment_id}": {
       "delete": {
         "operationId": "delete_attachment_api_v1_attachments__attachment_id__delete",
@@ -4345,6 +8009,287 @@
         "summary": "Register",
         "tags": [
           "auth"
+        ]
+      }
+    },
+    "/api/v1/budget-alerts": {
+      "get": {
+        "operationId": "list_budget_alerts_api_v1_budget_alerts_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "month",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_BudgetAlertResponse__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Budget Alerts",
+        "tags": [
+          "budgets"
+        ]
+      }
+    },
+    "/api/v1/budgets": {
+      "get": {
+        "operationId": "get_budget_api_v1_budgets_get",
+        "parameters": [
+          {
+            "description": "Month in YYYY-MM format",
+            "in": "query",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "description": "Month in YYYY-MM format",
+              "title": "Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_BudgetResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Budget",
+        "tags": [
+          "budgets"
+        ]
+      }
+    },
+    "/api/v1/budgets/comparison": {
+      "get": {
+        "operationId": "get_budget_comparison_api_v1_budgets_comparison_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "category_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Category Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "months",
+            "required": false,
+            "schema": {
+              "default": 6,
+              "title": "Months",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_BudgetComparisonResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Budget Comparison",
+        "tags": [
+          "budgets"
+        ]
+      }
+    },
+    "/api/v1/budgets/{month}": {
+      "put": {
+        "operationId": "set_budget_api_v1_budgets__month__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "title": "Month",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetBudgetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_BudgetResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Set Budget",
+        "tags": [
+          "budgets"
+        ]
+      }
+    },
+    "/api/v1/budgets/{month}/copy-from/{source_month}": {
+      "post": {
+        "operationId": "copy_budget_api_v1_budgets__month__copy_from__source_month__post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "month",
+            "required": true,
+            "schema": {
+              "title": "Month",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "source_month",
+            "required": true,
+            "schema": {
+              "title": "Source Month",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_BudgetResponse_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Copy Budget",
+        "tags": [
+          "budgets"
         ]
       }
     },
@@ -4993,6 +8938,460 @@
         ]
       }
     },
+    "/api/v1/goals": {
+      "get": {
+        "operationId": "list_goals_api_v1_goals_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/GoalStatus"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_GoalOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Goals",
+        "tags": [
+          "savings-and-goals"
+        ]
+      },
+      "post": {
+        "operationId": "create_goal_api_v1_goals_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoalCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_GoalOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create Goal",
+        "tags": [
+          "savings-and-goals"
+        ]
+      }
+    },
+    "/api/v1/goals/{id}": {
+      "delete": {
+        "operationId": "delete_goal_api_v1_goals__id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Delete Goal",
+        "tags": [
+          "savings-and-goals"
+        ]
+      },
+      "get": {
+        "operationId": "get_goal_api_v1_goals__id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_GoalOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Goal",
+        "tags": [
+          "savings-and-goals"
+        ]
+      },
+      "patch": {
+        "operationId": "update_goal_api_v1_goals__id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoalUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_GoalOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Update Goal",
+        "tags": [
+          "savings-and-goals"
+        ]
+      }
+    },
+    "/api/v1/goals/{id}/contributions": {
+      "get": {
+        "operationId": "list_contributions_api_v1_goals__id__contributions_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_GoalContributionOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Contributions",
+        "tags": [
+          "savings-and-goals"
+        ]
+      },
+      "post": {
+        "operationId": "add_contribution_api_v1_goals__id__contributions_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoalContributionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_GoalContributionOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Add Contribution",
+        "tags": [
+          "savings-and-goals"
+        ]
+      }
+    },
+    "/api/v1/goals/{id}/contributions/{contribution_id}": {
+      "delete": {
+        "operationId": "delete_contribution_api_v1_goals__id__contributions__contribution_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "contribution_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Contribution Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Delete Contribution",
+        "tags": [
+          "savings-and-goals"
+        ]
+      }
+    },
+    "/api/v1/goals/{id}/withdrawals": {
+      "post": {
+        "operationId": "add_withdrawal_api_v1_goals__id__withdrawals_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoalContributionCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_GoalContributionOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Add Withdrawal",
+        "tags": [
+          "savings-and-goals"
+        ]
+      }
+    },
     "/api/v1/imports": {
       "post": {
         "operationId": "upload_import_api_v1_imports_post",
@@ -5453,6 +9852,1127 @@
         "summary": "Update Source",
         "tags": [
           "income"
+        ]
+      }
+    },
+    "/api/v1/liabilities": {
+      "get": {
+        "operationId": "list_liabilities_api_v1_liabilities_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "as_of",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          },
+          {
+            "in": "query",
+            "name": "include_closed",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Include Closed",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_LiabilityOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Liabilities",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      },
+      "post": {
+        "operationId": "create_liability_api_v1_liabilities_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiabilityCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LiabilityOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create Liability",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/liabilities/{id}": {
+      "get": {
+        "operationId": "get_liability_api_v1_liabilities__id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "as_of",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LiabilityOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Liability",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      },
+      "patch": {
+        "operationId": "update_liability_api_v1_liabilities__id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiabilityUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LiabilityOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Update Liability",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/liabilities/{id}/balances": {
+      "get": {
+        "operationId": "list_balances_api_v1_liabilities__id__balances_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_LiabilityBalanceOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Balances",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      },
+      "post": {
+        "operationId": "add_balance_api_v1_liabilities__id__balances_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiabilityBalanceIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LiabilityBalanceOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Add Balance",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/liabilities/{id}/close": {
+      "post": {
+        "operationId": "close_liability_api_v1_liabilities__id__close_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LiabilityCloseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LiabilityOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Close Liability",
+        "tags": [
+          "assets-and-liabilities"
+        ]
+      }
+    },
+    "/api/v1/loans": {
+      "get": {
+        "operationId": "list_loans_api_v1_loans_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/LoanStatus"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_LoanOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Loans",
+        "tags": [
+          "loans-and-emi"
+        ]
+      },
+      "post": {
+        "operationId": "create_loan_api_v1_loans_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create Loan",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/loans/summary": {
+      "get": {
+        "operationId": "get_loans_summary_api_v1_loans_summary_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanSummaryOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Loans Summary",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/loans/{id}": {
+      "delete": {
+        "operationId": "delete_loan_api_v1_loans__id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Delete Loan",
+        "tags": [
+          "loans-and-emi"
+        ]
+      },
+      "get": {
+        "operationId": "get_loan_api_v1_loans__id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Loan",
+        "tags": [
+          "loans-and-emi"
+        ]
+      },
+      "patch": {
+        "operationId": "update_loan_api_v1_loans__id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Update Loan",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/loans/{id}/events": {
+      "post": {
+        "operationId": "add_loan_event_api_v1_loans__id__events_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanEventCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanEventOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Add Loan Event",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/loans/{id}/payments": {
+      "post": {
+        "operationId": "record_payment_api_v1_loans__id__payments_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanPaymentCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanPaymentOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Record Payment",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/loans/{id}/schedule": {
+      "get": {
+        "operationId": "get_loan_schedule_api_v1_loans__id__schedule_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanScheduleOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Loan Schedule",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/loans/{id}/simulate": {
+      "post": {
+        "operationId": "simulate_api_v1_loans__id__simulate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoanSimulateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_LoanSimulateOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Simulate",
+        "tags": [
+          "loans-and-emi"
+        ]
+      }
+    },
+    "/api/v1/metrics/emergency-fund": {
+      "get": {
+        "operationId": "get_emergency_fund_metric_api_v1_metrics_emergency_fund_get",
+        "parameters": [
+          {
+            "description": "As of date",
+            "in": "query",
+            "name": "as_of",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "As of date",
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_EmergencyFundMetricsOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Emergency Fund Metric",
+        "tags": [
+          "net-worth",
+          "metrics"
+        ]
+      }
+    },
+    "/api/v1/net-worth": {
+      "get": {
+        "operationId": "get_net_worth_api_v1_net_worth_get",
+        "parameters": [
+          {
+            "description": "As of date (YYYY-MM-DD)",
+            "in": "query",
+            "name": "as_of",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "As of date (YYYY-MM-DD)",
+              "title": "As Of"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_NetWorthOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Net Worth",
+        "tags": [
+          "net-worth"
+        ]
+      }
+    },
+    "/api/v1/net-worth/snapshots": {
+      "get": {
+        "operationId": "list_snapshots_api_v1_net_worth_snapshots_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_list_NetWorthSnapshotOut__"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "List Snapshots",
+        "tags": [
+          "net-worth"
+        ]
+      },
+      "post": {
+        "operationId": "create_snapshot_api_v1_net_worth_snapshots_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/NetWorthSnapshotCreate"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Payload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_NetWorthSnapshotOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Create Snapshot",
+        "tags": [
+          "net-worth"
+        ]
+      }
+    },
+    "/api/v1/net-worth/snapshots/{as_of}/recompute": {
+      "post": {
+        "operationId": "recompute_snapshot_api_v1_net_worth_snapshots__as_of__recompute_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "as_of",
+            "required": true,
+            "schema": {
+              "format": "date",
+              "title": "As Of",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_NetWorthSnapshotOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Recompute Snapshot",
+        "tags": [
+          "net-worth"
         ]
       }
     },
@@ -6056,6 +11576,119 @@
         "summary": "Savings Trend Csv",
         "tags": [
           "reports"
+        ]
+      }
+    },
+    "/api/v1/savings-targets": {
+      "get": {
+        "operationId": "get_savings_target_api_v1_savings_targets_get",
+        "parameters": [
+          {
+            "description": "Month in YYYY-MM format",
+            "in": "query",
+            "name": "month",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Month in YYYY-MM format",
+              "title": "Month"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_SavingsTargetOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Get Savings Target",
+        "tags": [
+          "savings-and-goals"
+        ]
+      }
+    },
+    "/api/v1/savings-targets/{effective_from}": {
+      "put": {
+        "operationId": "set_savings_target_api_v1_savings_targets__effective_from__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "effective_from",
+            "required": true,
+            "schema": {
+              "title": "Effective From",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavingsTargetIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_SavingsTargetOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Set Savings Target",
+        "tags": [
+          "savings-and-goals"
         ]
       }
     },

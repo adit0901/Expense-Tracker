@@ -31,6 +31,10 @@ const OverviewPage = lazy(() => import('@/features/dashboard/OverviewPage').then
 const ReportsPage = lazy(() => import('@/features/reports/ReportsPage').then((m) => ({ default: m.ReportsPage })))
 const IncomePage = lazy(() => import('@/features/reports/IncomePage').then((m) => ({ default: m.IncomePage })))
 const ExpensesPage = lazy(() => import('@/features/reports/ExpensesPage').then((m) => ({ default: m.ExpensesPage })))
+const BudgetsPage = lazy(() => import('@/features/budgets/BudgetsPage').then((m) => ({ default: m.BudgetsPage })))
+const GoalsPage = lazy(() => import('@/features/goals/GoalsPage').then((m) => ({ default: m.GoalsPage })))
+const NetWorthPage = lazy(() => import('@/features/networth/NetWorthPage').then((m) => ({ default: m.NetWorthPage })))
+const LoansPage = lazy(() => import('@/features/loans/LoansPage').then((m) => ({ default: m.LoansPage })))
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingBlock label="Loading page" />}>{children}</Suspense>
@@ -80,6 +84,11 @@ export function appRoutes(queryClient: QueryClient): RouteObject[] {
             { path: 'income', element: <Lazy><IncomePage /></Lazy> },
             { path: 'expenses', element: <Lazy><ExpensesPage /></Lazy> },
             { path: 'reports', element: <Lazy><ReportsPage /></Lazy> },
+            { path: 'budgets', element: <Lazy><BudgetsPage /></Lazy> },
+            { path: 'goals', element: <Lazy><GoalsPage /></Lazy> },
+            { path: 'net-worth', element: <Lazy><NetWorthPage /></Lazy> },
+            { path: 'loans', element: <Lazy><LoansPage /></Lazy> },
+            { path: 'loans/:type', element: <Lazy><LoansPage /></Lazy> },
             {
               path: 'settings',
               element: <SettingsPage />,
