@@ -35,6 +35,65 @@ export type Overview = S['Overview']
 export type Tile = S['Tile']
 export type CategoryBreakdown = S['CategoryBreakdown']
 
+// P1 Budgets
+export type BudgetResponse = S['BudgetResponse']
+export type BudgetLineResponse = S['BudgetLineResponse']
+export type BudgetLineInput = S['BudgetLineInput']
+export type SetBudgetRequest = S['SetBudgetRequest']
+export type BudgetComparisonResponse = S['BudgetComparisonResponse']
+export type BudgetMonthComparisonItem = S['BudgetMonthComparisonItem']
+export type BudgetAlertResponse = S['BudgetAlertResponse']
+
+// P1 Savings & Goals
+export type SavingsTargetIn = S['SavingsTargetIn']
+export type SavingsTargetOut = S['SavingsTargetOut']
+export type SavingsTargetDashboardTile = S['SavingsTargetDashboardTile']
+export type GoalOut = S['GoalOut']
+export type GoalType = GoalOut['type']
+export type GoalCreate = S['GoalCreate']
+export type GoalUpdate = S['GoalUpdate']
+export type GoalContributionOut = S['GoalContributionOut']
+export type GoalContributionCreate = S['GoalContributionCreate']
+
+// P1 Assets & Liabilities
+export type AssetOut = S['AssetOut']
+export type AssetCreate = S['AssetCreate']
+export type AssetUpdate = S['AssetUpdate']
+export type AssetCloseIn = S['AssetCloseIn']
+export type AssetValuationOut = S['AssetValuationOut']
+export type AssetValuationIn = S['AssetValuationIn']
+export type LiabilityOut = S['LiabilityOut']
+export type LiabilityCreate = S['LiabilityCreate']
+export type LiabilityUpdate = S['LiabilityUpdate']
+export type LiabilityCloseIn = S['LiabilityCloseIn']
+export type LiabilityBalanceOut = S['LiabilityBalanceOut']
+export type LiabilityBalanceIn = S['LiabilityBalanceIn']
+
+// P1 Loans & EMIs
+export type LoanOut = S['LoanOut']
+export type LoanType = LoanOut['type']
+export type LoanCreate = S['LoanCreate']
+export type LoanUpdate = S['LoanUpdate']
+export type LoanScheduleOut = S['LoanScheduleOut']
+export type InstallmentOut = S['InstallmentOut']
+export type LoanPaymentCreate = S['LoanPaymentCreate']
+export type LoanPaymentOut = S['LoanPaymentOut']
+export type LoanEventCreate = S['LoanEventCreate']
+export type LoanEventOut = S['LoanEventOut']
+export type LoanSimulateRequest = S['LoanSimulateRequest']
+export type LoanSimulateOut = S['LoanSimulateOut']
+export type LoanSummaryOut = S['LoanSummaryOut']
+export type LoanTrendPoint = S['LoanTrendPoint']
+
+// P1 Net Worth
+export type NetWorthOut = S['NetWorthOut']
+export type NetWorthSnapshotOut = S['NetWorthSnapshotOut']
+export type NetWorthSnapshotCreate = S['NetWorthSnapshotCreate']
+export type NetWorthPoint = S['NetWorthPoint']
+export type EmergencyFundMetricsOut = S['EmergencyFundMetricsOut']
+export type PlanningTile = S['PlanningTile']
+export type BudgetAlertDashboardItem = S['BudgetAlertDashboardItem']
+
 export interface PageMeta {
   page: number
   page_size: number

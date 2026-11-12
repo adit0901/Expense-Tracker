@@ -223,6 +223,114 @@ and the methods sum to the total of **1,350.00**.
 
 **Test:** `tests/integration/test_dashboard.py::test_expense_report_by_method_sums_to_total`.
 
+## F12. Reducing-balance EMI & Amortization
+
+**Definition.** EMI is computed using the standard reducing-balance formula:
+$$\text{EMI} = P \times r \times \frac{(1+r)^n}{(1+r)^n - 1}$$
+where $P$ is principal, $r = \text{annual rate} \div 12 \div 100$, and $n$ is tenure in months, rounded half-up to 2 dp.
+When annual rate is 0%, $\text{EMI} = P \div n$, rounded half-up to 2 dp.
+
+Per installment:
+- $\text{Interest} = \text{round}(\text{outstanding} \times r)$
+- $\text{Principal} = \text{payment} - \text{interest}$
+- $\text{Closing} = \text{outstanding} - \text{principal}$
+
+The final installment absorbs any residual rounding so that closing outstanding is exactly **0.00**, and the sum of principal payments equals the original loan principal $P$.
+
+**Example (Standard EMI).** $P = 1,000,000.00$, annual rate $12\%$, $n = 12$ months.
+- Monthly EMI: **88,848.79**
+- Installment 1: interest 10,000.00, principal 78,848.79, closing 921,151.21
+- Installment 12 (final): payment 88,848.76, principal 87,969.07, interest 879.69, closing 0.00
+- Total interest payable: **66,185.45**
+- Total principal: **1,000,000.00**
+
+**Tests:** `tests/unit/test_calculations_p1.py::test_emi_spec_examples`,
+`tests/unit/test_calculations_p1.py::test_amortization_schedule_spec_example`.
+
+**Example (Zero-interest).** $P = 100,000.00$, annual rate $0\%$, $n = 12$ months.
+- Installments 1–11: **8,333.33**
+- Installment 12: **8,333.37** (absorbs 0.04 remainder), closing 0.00.
+
+**Test:** `tests/unit/test_calculations_p1.py::test_zero_rate_amortization_schedule`.
+
+**Example (Home loan).** $P = 5,000,000.00$, annual rate $8.5\%$, $n = 240$ months.
+- Computed EMI: **43,391.16**
+
+**Test:** `tests/unit/test_calculations_p1.py::test_emi_spec_examples`.
+
+## F13. Loan Prepayments, Rate Changes and Simulations
+
+**Definition.**
+- **Prepayment**: reduces loan outstanding principal; user chooses between "reduce tenure" (keeps EMI amount constant, ending date earlier) and "reduce EMI" (recalculates lower EMI for remaining tenure).
+- **Rate change**: updates annual interest rate from effective date; user chooses between "keep tenure" (EMI adjusts) and "keep EMI" (tenure extends). Rejects negative amortization if EMI $\le$ monthly interest.
+- **Simulation**: evaluates one-time prepayment, recurring extra monthly payment, or rate change without saving to the database.
+
+**Tests:** `tests/unit/test_calculations_p1.py::test_prepayment_reduce_tenure`,
+`tests/unit/test_calculations_p1.py::test_rate_change_scenarios`,
+`tests/unit/test_calculations_p1.py::test_loan_simulation`.
+
+## F14. Monthly Budgets & Utilization
+
+**Definition.**
+$$\text{Utilization} = \frac{\text{Actual Expenses}}{\text{Budget}} \times 100$$
+rounded half-up to 2 dp. $\text{Remaining} = \text{Budget} - \text{Actual Expenses}$. A budget of zero is not permitted.
+
+**Example.** Budget 60,000.00 and actual expenses 45,000.00 give utilization of **75.00** and remaining **15,000.00**.
+
+**Example (Overspent).** Budget 12,000.00 and actual expenses 13,500.00 give utilization of **112.50** and remaining **-1,500.00**.
+
+**Test:** `tests/unit/test_calculations_p1.py::test_budget_utilization_and_remaining`.
+
+## F15. Savings Target & Goal Projections
+
+**Definition.**
+- **Savings Target Achievement**: $\text{Actual Savings} \div \text{Target} \times 100$. If actual savings is negative, achievement is **0.00** and shortfall is $\text{Target} - \text{Actual}$.
+- **Goal Progress**: $\min(100.00, \text{round}(\text{Current Amount} \div \text{Target Amount} \times 100))$.
+- **Required Monthly Contribution**: $\text{Remaining} \div \text{Months Left}$. Returns `null` if the target date has passed (overdue).
+- **Estimated Completion Date**: $\lceil \text{Remaining} \div \text{Average 3-month net contribution} \rceil$ months ahead. Returns `null` ("Cannot estimate") if the 3-month average is $\le 0$.
+
+**Example (Savings Target).** Target 30,000.00 and actual savings 36,000.00 give achievement **120.00**. With actual savings -5,000.00, achievement is **0.00** and shortfall is **35,000.00**.
+
+**Example (Goal Contribution).** Remaining 225,000.00 and 9 full months left before target date give required monthly contribution of **25,000.00**.
+
+**Tests:** `tests/unit/test_calculations_p1.py::test_savings_target_achievement`,
+`tests/unit/test_calculations_p1.py::test_goal_projections`.
+
+## F16. Emergency Fund Coverage
+
+**Definition.**
+$$\text{Emergency Fund Coverage (months)} = \frac{\text{Liquid Savings}}{\text{Essential Monthly Expenses}}$$
+where:
+- $\text{Liquid Savings} = \text{bank} + \text{cash} + \text{wallet balances} + \text{liquid manual assets}$.
+- $\text{Essential Monthly Expenses} = \text{average of last 3 complete months of essential expenses (excluding Loan Interest)} + \text{current monthly EMI commitment}$.
+When essential expenses are zero, coverage is **null** (displayed as "N/A").
+
+**Example.** Liquid savings of 300,000.00 and essential monthly expenses of 50,000.00 give coverage of **6.00** months.
+
+**Test:** `tests/unit/test_calculations_p1.py::test_emergency_fund_coverage`.
+
+## F17. Net Worth & Growth
+
+**Definition.**
+$$\text{Net Worth} = \text{Total Assets} - \text{Total Liabilities}$$
+as of a date.
+- Assets: bank, cash, wallet balances ($\ge 0$), manual asset valuations $\le$ as_of (excluding closed), and investment holdings.
+- Liabilities: credit card outstanding, loan outstanding principal $\le$ as_of, other liabilities $\le$ as_of (excluding closed), and negative bank balances (overdraft).
+- MoM / YoY growth:
+$$\text{Growth \%} = \frac{\text{Current} - \text{Base}}{|\text{Base}|} \times 100$$
+When Base is missing, growth is **null** ("—"). When Base is zero, percentage is **null**.
+
+**Example.** Bank 300,000.00, FD 205,000.00, Gold 165,000.00, Card outstanding 25,000.00, Home loan outstanding 4,800,000.00:
+- Total assets: **670,000.00**
+- Total liabilities: **4,825,000.00**
+- Net worth: **-4,155,000.00**
+
+**Example (Overdraft).** Bank balance -2,000.00 is counted in liabilities as **2,000.00**, giving total liabilities 2,000.00 and net worth **-2,000.00**.
+
+**Tests:** `tests/unit/test_calculations_p1.py::test_compute_net_worth_spec_example`,
+`tests/unit/test_calculations_p1.py::test_compute_net_worth_overdraft`,
+`tests/unit/test_calculations_p1.py::test_growth_computation`.
+
 ## Consistency guarantee
 
 The dashboard tiles, the dashboard and report trends, the category breakdown, the expense,

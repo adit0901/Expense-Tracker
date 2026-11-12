@@ -11,6 +11,7 @@ from typing import Any
 from sqlalchemy import String, case, extract, func, literal, select
 from sqlalchemy.orm import Session, aliased
 
+from app.core.money import ZERO
 from app.models.category import Category
 from app.models.enums import SalaryComponentKind, TransactionStatus, TransactionType
 from app.models.income_source import IncomeSource
@@ -31,8 +32,12 @@ def _scope(user_id: uuid.UUID, start: date, end: date) -> list[Any]:
 def totals_by_type(
     db: Session, user_id: uuid.UUID, start: date, end: date
 ) -> dict[TransactionType, Decimal]:
+    amt = case(
+        (T.type == TransactionType.loan_payment, func.coalesce(T.interest_component, ZERO)),
+        else_=T.amount,
+    )
     rows = db.execute(
-        select(T.type, func.sum(T.amount)).where(*_scope(user_id, start, end)).group_by(T.type)
+        select(T.type, func.sum(amt)).where(*_scope(user_id, start, end)).group_by(T.type)
     )
     return {r[0]: Decimal(r[1]) for r in rows}
 
@@ -41,22 +46,34 @@ def monthly_by_type(
     db: Session, user_id: uuid.UUID, start: date, end: date
 ) -> dict[tuple[int, int], dict[TransactionType, Decimal]]:
     y, m = extract("year", T.txn_date), extract("month", T.txn_date)
+    amt = case(
+        (T.type == TransactionType.loan_payment, func.coalesce(T.interest_component, ZERO)),
+        else_=T.amount,
+    )
     rows = db.execute(
-        select(y, m, T.type, func.sum(T.amount))
+        select(y, m, T.type, func.sum(amt))
         .where(*_scope(user_id, start, end))
         .group_by(y, m, T.type)
     )
     out: dict[tuple[int, int], dict[TransactionType, Decimal]] = defaultdict(dict)
-    for yy, mm, t, amt in rows:
-        out[(int(yy), int(mm))][t] = Decimal(amt)
+    for yy, mm, t, a in rows:
+        out[(int(yy), int(mm))][t] = Decimal(a)
     return out
 
 
 def _net_expense_amount() -> Any:
-    return case((T.type == TransactionType.refund, -T.amount), else_=T.amount)
+    return case(
+        (T.type == TransactionType.refund, -T.amount),
+        (T.type == TransactionType.loan_payment, func.coalesce(T.interest_component, ZERO)),
+        else_=T.amount,
+    )
 
 
-_EXPENSE_TYPES = (TransactionType.expense, TransactionType.refund)
+_EXPENSE_TYPES = (
+    TransactionType.expense,
+    TransactionType.refund,
+    TransactionType.loan_payment,
+)
 
 
 def expense_net_by_category(

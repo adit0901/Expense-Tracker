@@ -17,6 +17,7 @@ test('navigation lists all sections and highlights the current one', async () =>
     expect(within(nav).getByRole('link', { name: sub })).toBeInTheDocument()
   }
   expect(within(nav).getByRole('link', { name: /^Transactions/ })).toHaveAttribute('aria-current', 'page')
+  await screen.findByRole('table')
 })
 
 test.each(COMING_SOON_ROUTES.map((r) => [r.label, r.to]))(

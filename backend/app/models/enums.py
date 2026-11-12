@@ -24,6 +24,60 @@ class TransactionType(StrEnum):
     expense = "expense"
     transfer = "transfer"
     refund = "refund"
+    loan_payment = "loan_payment"
+
+
+class GoalType(StrEnum):
+    emergency_fund = "emergency_fund"
+    vacation = "vacation"
+    house = "house"
+    vehicle = "vehicle"
+    education = "education"
+    retirement = "retirement"
+    other = "other"
+
+
+class GoalStatus(StrEnum):
+    active = "active"
+    paused = "paused"
+    completed = "completed"
+    archived = "archived"
+
+
+class GoalContributionKind(StrEnum):
+    contribution = "contribution"
+    withdrawal = "withdrawal"
+
+
+class AssetType(StrEnum):
+    fixed_deposit = "fixed_deposit"
+    gold = "gold"
+    real_estate = "real_estate"
+    ppf = "ppf"
+    epf = "epf"
+    nps = "nps"
+    mutual_fund = "mutual_fund"
+    vehicle = "vehicle"
+    other = "other"
+
+
+class LoanType(StrEnum):
+    home = "home"
+    car = "car"
+    personal = "personal"
+    education = "education"
+    other = "other"
+
+
+class LoanStatus(StrEnum):
+    active = "active"
+    closed = "closed"
+
+
+class LoanEventKind(StrEnum):
+    rate_change = "rate_change"
+    prepayment = "prepayment"
+    emi_override = "emi_override"
 
 
 class PaymentMethod(StrEnum):

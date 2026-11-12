@@ -176,6 +176,7 @@ export const api = {
   page: <T>(path: string, query?: Query) => request<T>(path, { query }),
   post: <T>(path: string, body?: unknown, extra: Partial<RequestOptions> = {}) =>
     getData<T>(path, { method: 'POST', body, ...extra }),
+  put: <T>(path: string, body?: unknown) => getData<T>(path, { method: 'PUT', body }),
   patch: <T>(path: string, body?: unknown) => getData<T>(path, { method: 'PATCH', body }),
   del: (path: string, query?: Query, body?: unknown) =>
     request<unknown>(path, { method: 'DELETE', query, body }),

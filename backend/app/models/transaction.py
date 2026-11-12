@@ -54,6 +54,21 @@ class Transaction(IdMixin, TimestampMixin, Base):
         ),
         CheckConstraint("type = 'income' OR income_source_id IS NULL", name="source_only_income"),
         CheckConstraint("type = 'refund' OR refund_of_id IS NULL", name="refund_of_only_refund"),
+        CheckConstraint(
+            "type <> 'loan_payment' OR ("
+            "loan_id IS NOT NULL AND "
+            "principal_component IS NOT NULL AND "
+            "interest_component IS NOT NULL AND "
+            "(principal_component + interest_component) = amount)",
+            name="loan_payment_components",
+        ),
+        CheckConstraint(
+            "type = 'loan_payment' OR ("
+            "loan_id IS NULL AND "
+            "principal_component IS NULL AND "
+            "interest_component IS NULL)",
+            name="loan_components_only_for_loan_payment",
+        ),
         Index("ix_txn_user_date", "user_id", "txn_date"),
         Index("ix_txn_user_account_date", "user_id", "account_id", "txn_date"),
         Index("ix_txn_user_counter_date", "user_id", "counter_account_id", "txn_date"),
@@ -107,6 +122,11 @@ class Transaction(IdMixin, TimestampMixin, Base):
         UUID(as_uuid=True), ForeignKey("import_batches.id", ondelete="SET NULL")
     )
     import_fingerprint: Mapped[str | None] = mapped_column(CHAR(64))
+    loan_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("loans.id", ondelete="SET NULL")
+    )
+    principal_component: Mapped[Decimal | None] = mapped_column(Numeric(19, 4))
+    interest_component: Mapped[Decimal | None] = mapped_column(Numeric(19, 4))
 
     salary_components: Mapped[list[SalaryComponent]] = relationship(
         cascade="all, delete-orphan", passive_deletes=True, order_by="SalaryComponent.position"

@@ -30,6 +30,10 @@ def _session_factory() -> sessionmaker[Session]:
     return sessionmaker(bind=get_engine(), expire_on_commit=False)
 
 
+def SessionLocal() -> Session:  # noqa: N802
+    return _session_factory()()
+
+
 def get_db() -> Iterator[Session]:
     """Request-scoped session. Services commit explicitly at their transaction boundary."""
     session = _session_factory()()

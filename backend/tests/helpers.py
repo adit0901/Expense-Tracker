@@ -25,6 +25,9 @@ class AuthedUser:
     def post(self, url: str, **kw: Any) -> Any:
         return self.client.post(url, **kw)
 
+    def put(self, url: str, **kw: Any) -> Any:
+        return self.client.put(url, **kw)
+
     def patch(self, url: str, **kw: Any) -> Any:
         return self.client.patch(url, **kw)
 

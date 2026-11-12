@@ -38,6 +38,7 @@ class Settings(BaseSettings):
     smtp_from: str = "FinTrack <no-reply@fintrack.local>"
     frontend_base_url: str = "http://localhost:5173"
     upload_dir: str = "./data/uploads"
+    redis_url: str = "redis://localhost:6379/0"
     login_max_failures: int = 5
     login_window_seconds: int = 15 * 60
     api_rate_limit: str = "300/minute"

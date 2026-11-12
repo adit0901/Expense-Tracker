@@ -20,6 +20,14 @@ services:
     image: axllent/mailpit:latest
     ports: ["8025:8025", "1025:1025"]
 
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 5
+
   backend:
     build: { context: ., dockerfile: infrastructure/backend.Dockerfile }
     command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --no-access-log"
@@ -27,6 +35,7 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://fintrack_app:fintrack_app@db:5432/fintrack
       MIGRATION_DATABASE_URL: postgresql+psycopg://fintrack:fintrack@db:5432/fintrack
+      REDIS_URL: redis://redis:6379/0
       SMTP_HOST: mailpit
       UPLOAD_DIR: /data/uploads
     volumes:
@@ -36,6 +45,20 @@ services:
     ports: ["8000:8000"]
     depends_on:
       db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+  worker:
+    build: { context: ., dockerfile: infrastructure/backend.Dockerfile }
+    command: arq app.tasks.worker.WorkerSettings
+    env_file: [.env.example]
+    environment:
+      DATABASE_URL: postgresql+psycopg://fintrack_app:fintrack_app@db:5432/fintrack
+      REDIS_URL: redis://redis:6379/0
+    volumes:
+      - ./backend/app:/app/app
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
 
   frontend:
     image: node:24-alpine
