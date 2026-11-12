@@ -65,6 +65,8 @@ http://localhost:8080 and proxies `/api` to the backend.
 ## Quick start B: local, without Docker
 
 Run each long-running command in its own terminal, starting from the repository root.
+For a fuller walkthrough, with connection strings, the list of tables and troubleshooting
+tips, see [docs/running-locally.md](docs/running-locally.md).
 
 **1. Start PostgreSQL.** This creates a cluster in `.local/pgdata` on port 54329, with the
 roles `fintrack` (owner) and `fintrack_app` (application) and the databases `fintrack` and
