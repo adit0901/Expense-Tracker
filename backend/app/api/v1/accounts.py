@@ -61,6 +61,13 @@ def archive_account(
     return ok(svc.archive_account(db, user.id, account_id))
 
 
+@router.post("/{account_id}/unarchive")
+def unarchive_account(
+    account_id: uuid.UUID, user: CurrentUser, db: DbSession
+) -> Envelope[AccountOut]:
+    return ok(svc.unarchive_account(db, user.id, account_id))
+
+
 @router.delete("/{account_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_account(account_id: uuid.UUID, user: CurrentUser, db: DbSession) -> Response:
     svc.delete_account(db, user.id, account_id)

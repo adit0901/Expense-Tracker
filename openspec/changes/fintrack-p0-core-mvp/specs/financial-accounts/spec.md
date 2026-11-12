@@ -7,7 +7,7 @@ Represents the places a user's money lives or is owed (bank accounts, cash, cred
 ## ADDED Requirements
 
 ### Requirement: Manage financial accounts
-A user SHALL be able to create, view, edit and archive accounts with: name, type (`bank`, `cash`, `credit_card`, `wallet`), institution (optional), last 4 digits (optional), currency (`INR` in P0), opening balance and opening date.
+A user SHALL be able to create, view, edit, archive and unarchive accounts with: name, type (`bank`, `cash`, `credit_card`, `wallet`), institution (optional), last 4 digits (optional), currency (`INR` in P0), opening balance and opening date.
 
 #### Scenario: Create bank account
 - **WHEN** a user creates a bank account "HDFC Savings" with opening balance 50000.00 on 2026-01-01
@@ -41,6 +41,11 @@ An account with transactions SHALL NOT be hard-deleted; it SHALL be archived, hi
 #### Scenario: Archived account in reports
 - **WHEN** a user views last year's expense report after archiving an account
 - **THEN** that account's past transactions are still included
+
+#### Scenario: Unarchive an account
+- **WHEN** a user unarchives an archived account
+- **THEN** the account is active again: it appears in account lists and entry forms, counts toward the accounts summary, and the change is recorded in the audit log
+- **AND** unarchiving an account that is already active succeeds without changing it
 
 ### Requirement: Accounts summary
 The system SHALL provide a summary of total cash and bank balances (liquid funds) and total credit card outstanding across non-archived accounts.

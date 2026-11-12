@@ -194,6 +194,23 @@ def archive_account(db: Session, user_id: uuid.UUID, account_id: uuid.UUID) -> A
     return get_account(db, user_id, account.id)
 
 
+def unarchive_account(db: Session, user_id: uuid.UUID, account_id: uuid.UUID) -> AccountOut:
+    """Restore an archived account to active use. Idempotent for active accounts."""
+    account = AccountRepository(db, user_id).get_or_404(account_id, for_update=True)
+    if account.archived_at is not None:
+        account.archived_at = None
+        audit.record(
+            db,
+            actor_user_id=user_id,
+            action="unarchive",
+            entity_type="account",
+            entity_id=account.id,
+            changed_fields=["archived_at"],
+        )
+        db.commit()
+    return get_account(db, user_id, account.id)
+
+
 def delete_account(db: Session, user_id: uuid.UUID, account_id: uuid.UUID) -> None:
     account = AccountRepository(db, user_id).get_or_404(account_id, for_update=True)
     if has_transactions(db, user_id, account.id):

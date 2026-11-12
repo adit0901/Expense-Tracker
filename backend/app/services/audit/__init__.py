@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.core.request_context import get_request_id
 from app.models.audit import AuditLog
 
-AuditAction = Literal["create", "update", "delete", "archive", "import", "undo_import"]
+AuditAction = Literal["create", "update", "delete", "archive", "unarchive", "import", "undo_import"]
 
 
 def record(

@@ -19,6 +19,7 @@ register_case(
             Probe("GET", "/api/v1/accounts/{id}"),
             Probe("PATCH", "/api/v1/accounts/{id}", json={"name": "Hijacked"}),
             Probe("POST", "/api/v1/accounts/{id}/archive"),
+            Probe("POST", "/api/v1/accounts/{id}/unarchive"),
             Probe("DELETE", "/api/v1/accounts/{id}"),
         ],
         list_path="/api/v1/accounts?include_archived=true",

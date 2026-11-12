@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Archive, Pencil, Plus, Trash2 } from 'lucide-react'
+import { Archive, ArchiveRestore, Pencil, Plus, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -36,6 +36,15 @@ export function AccountsPage() {
       await invalidateFinancials(qc)
       toast.success('Account archived')
       setArchiving(null)
+    },
+    onError: (err) => toast.error(errorMessage(err)),
+  })
+  // Unarchiving is harmless and reversible, so it needs no confirmation step.
+  const unarchive = useMutation({
+    mutationFn: (a: AccountOut) => api.post(`/accounts/${a.id}/unarchive`),
+    onSuccess: async () => {
+      await invalidateFinancials(qc)
+      toast.success('Account restored')
     },
     onError: (err) => toast.error(errorMessage(err)),
   })
@@ -109,7 +118,13 @@ export function AccountsPage() {
                       <Button variant="ghost" size="icon-sm" aria-label={`Edit ${a.name}`} onClick={() => { setEditing(a); setFormOpen(true) }}>
                         <Pencil aria-hidden />
                       </Button>
-                      {!a.archived_at && (
+                      {a.archived_at ? (
+                        <Button variant="ghost" size="icon-sm" aria-label={`Unarchive ${a.name}`} title="Unarchive"
+                          disabled={unarchive.isPending && unarchive.variables?.id === a.id}
+                          onClick={() => unarchive.mutate(a)}>
+                          <ArchiveRestore aria-hidden />
+                        </Button>
+                      ) : (
                         <Button variant="ghost" size="icon-sm" aria-label={`Archive ${a.name}`} onClick={() => setArchiving(a)}>
                           <Archive aria-hidden />
                         </Button>

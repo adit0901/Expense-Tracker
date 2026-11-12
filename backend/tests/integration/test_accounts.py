@@ -108,6 +108,18 @@ def test_archive_hides_from_list_but_keeps_record(user: AuthedUser) -> None:
     assert user.get(f"{URL}/{acct['id']}").status_code == 200
 
 
+def test_unarchive_restores_account_to_lists_and_summary(user: AuthedUser) -> None:
+    acct = create_account(user, opening_balance="1500.00")
+    user.post(f"{URL}/{acct['id']}/archive")
+    assert data(user.get(f"{URL}/summary"))["liquid_funds"] == "0.00"
+    out = data(user.post(f"{URL}/{acct['id']}/unarchive"))
+    assert out["archived_at"] is None
+    assert [a["id"] for a in data(user.get(URL))] == [acct["id"]]
+    assert data(user.get(f"{URL}/summary"))["liquid_funds"] == "1500.00"
+    # Unarchiving an active account is a no-op, not an error.
+    assert data(user.post(f"{URL}/{acct['id']}/unarchive"))["archived_at"] is None
+
+
 def test_list_pagination_and_sort(user: AuthedUser) -> None:
     for n in ["B", "A", "C"]:
         create_account(user, n)
@@ -122,11 +134,18 @@ def test_account_audit_entries(user: AuthedUser, db: Session) -> None:
     acct = create_account(user)
     user.patch(f"{URL}/{acct['id']}", json={"name": "Renamed"})
     user.post(f"{URL}/{acct['id']}/archive")
+    user.post(f"{URL}/{acct['id']}/unarchive")
+    user.post(f"{URL}/{acct['id']}/unarchive")  # no-op: no second entry
     rows = db.scalars(
         select(AuditLog)
         .where(AuditLog.entity_id == acct["id"])
         .order_by(AuditLog.occurred_at, AuditLog.action)
     ).all()
     actions = sorted((r.action, tuple(r.changed_fields)) for r in rows)
-    assert actions == [("archive", ("archived_at",)), ("create", ()), ("update", ("name",))]
+    assert actions == [
+        ("archive", ("archived_at",)),
+        ("create", ()),
+        ("unarchive", ("archived_at",)),
+        ("update", ("name",)),
+    ]
     assert all(r.actor_user_id == user.id for r in rows)

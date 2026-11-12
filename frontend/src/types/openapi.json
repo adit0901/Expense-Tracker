@@ -3896,6 +3896,54 @@
         ]
       }
     },
+    "/api/v1/accounts/{account_id}/unarchive": {
+      "post": {
+        "operationId": "unarchive_account_api_v1_accounts__account_id__unarchive_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Account Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Envelope_AccountOut_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Unarchive Account",
+        "tags": [
+          "accounts"
+        ]
+      }
+    },
     "/api/v1/attachments/{attachment_id}": {
       "delete": {
         "operationId": "delete_attachment_api_v1_attachments__attachment_id__delete",

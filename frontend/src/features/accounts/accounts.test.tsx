@@ -63,3 +63,24 @@ test('deleting an account with history offers archiving', async () => {
   await user.click(within(await screen.findByRole('alertdialog')).getByRole('button', { name: 'Delete' }))
   expect(await screen.findByRole('heading', { name: 'Archive HDFC Savings?' })).toBeInTheDocument()
 })
+
+test('archived accounts can be unarchived from the list', async () => {
+  const archivedAccount = { ...ACCOUNT, archived_at: '2026-11-11T00:00:00Z' }
+  let unarchived = false
+  server.use(
+    http.get(`${API}/accounts`, () =>
+      HttpResponse.json({ data: [unarchived ? ACCOUNT : archivedAccount], meta: { page: 1, page_size: 100, total_items: 1, total_pages: 1 } })),
+    http.post(`${API}/accounts/acc-1/unarchive`, () => {
+      unarchived = true
+      return HttpResponse.json({ data: ACCOUNT, meta: {} })
+    }),
+  )
+  const user = userEvent.setup()
+  renderApp('/settings/accounts')
+  expect(await screen.findByText('Archived')).toBeInTheDocument()
+  expect(screen.queryByRole('button', { name: 'Archive HDFC Savings' })).not.toBeInTheDocument()
+  await user.click(screen.getByRole('button', { name: 'Unarchive HDFC Savings' }))
+  await waitFor(() => expect(unarchived).toBe(true))
+  expect(await screen.findByRole('button', { name: 'Archive HDFC Savings' })).toBeInTheDocument()
+  expect(screen.queryByText('Archived')).not.toBeInTheDocument()
+})

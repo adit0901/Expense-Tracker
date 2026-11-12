@@ -38,6 +38,7 @@
 - [x] 4.2 Create `categories` model/migration; seed default income/expense categories (incl. system "Loan Interest" and essential flags) on registration; verify a test of a new user's categories
 - [x] 4.3 Implement custom categories/subcategories (one level, case-insensitive uniqueness), essential toggle, delete-with-replacement and system-category protection; verify tests for third-level rejection, `category_in_use`, reassignment
 - [x] 4.4 Add accounts and categories to the cross-tenant sweep and audit assertions; verify the sweep passes
+- [x] 4.5 Add `POST /api/v1/accounts/{id}/unarchive` (idempotent, audited); verify tests for restored list/summary, audit entry and the cross-tenant probe
 
 ## 5. Transactions core
 
@@ -85,6 +86,7 @@
 - [x] 9.6 Build CSV import wizard (upload, mapping, preview with errors/duplicates, confirm, undo); verify RTL tests for preview rendering and deselected duplicates
 - [x] 9.7 Build Income and Expenses pages (source/category breakdowns) and Reports & Analytics P0 views with CSV export; verify RTL tests with MSW fixtures
 - [x] 9.8 Build Overview dashboard (KPI tiles, period filter incl. custom and FY, income vs expense, savings trend, category donut with drill-down, recent transactions, skeleton/empty/error states, chart table alternatives); verify RTL tests for empty state and drill-down navigation
+- [x] 9.9 Add an Unarchive action on archived account cards; verify an RTL test that it calls the API and the card becomes active
 
 ## 10. Integration verification
 
