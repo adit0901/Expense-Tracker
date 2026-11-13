@@ -17,6 +17,7 @@ import { useFormatters } from '@/features/settings/usePreferences'
 import type { LoanCreate, LoanType } from '@/services/api/types'
 
 import { useCreateLoan } from './api'
+import { useBreakUIScenario } from './useBreakUIScenario'
 
 interface LoanFormDialogProps {
   open: boolean
@@ -73,12 +74,99 @@ export function LoanFormDialog({ open, onOpenChange, defaultType }: LoanFormDial
   const [customEmi, setCustomEmi] = useState('')
 
   const [notes, setNotes] = useState('')
+  const scenario = useBreakUIScenario()
+
+  const applyPreset = (preset: 'demo' | 'worst' | 'zero_rate' | 'unicode' | 'clear') => {
+    switch (preset) {
+      case 'demo':
+        setType('home')
+        setLender('HDFC Bank Home Loan')
+        setPrincipal('4500000.00')
+        setAnnualRate('8.75')
+        setTenureMonths('240')
+        setStartDate('2023-05-10')
+        setFirstEmiDate('2023-06-10')
+        setIsMidTenure(false)
+        setBaselineOutstanding('')
+        setOverrideEmi(false)
+        setCustomEmi('')
+        setNotes('Primary residence loan linked to repo rate')
+        break
+      case 'worst':
+        setType('home')
+        setLender(
+          'Housing Development & Infrastructure Finance Corporation of South Asia Bank Limited — Corporate Branch #4920',
+        )
+        setPrincipal('50000000.00')
+        setAnnualRate('9.45')
+        setTenureMonths('360')
+        setStartDate('2025-01-05')
+        setFirstEmiDate('2025-02-05')
+        setIsMidTenure(true)
+        setBaselineOutstanding('48976543.21')
+        setBaselineDate('2025-01-05')
+        setOverrideEmi(true)
+        setCustomEmi('418890.45')
+        setNotes(
+          'Consortium mortgage with 30-year amortization schedule and tiered benchmark interest rate',
+        )
+        break
+      case 'zero_rate':
+        setType('car')
+        setLender('StateBankOfHyderabad-RetailAssetsAndAssetReconstructionSecuritizationBranch')
+        setPrincipal('1200000.00')
+        setAnnualRate('0.00')
+        setTenureMonths('36')
+        setStartDate('2024-01-01')
+        setFirstEmiDate('2024-02-01')
+        setIsMidTenure(false)
+        setBaselineOutstanding('')
+        setOverrideEmi(true)
+        setCustomEmi('33333.33')
+        setNotes('Zero interest promotional car loan')
+        break
+      case 'unicode':
+        setType('education')
+        setLender('भारतीय स्टेट बैंक — 🏦 SBI Global Ed-vantage (मुंबई दक्षिण उपनगर)')
+        setPrincipal('2500000.00')
+        setAnnualRate('24.75')
+        setTenureMonths('84')
+        setStartDate('2024-06-15')
+        setFirstEmiDate('2024-07-15')
+        setIsMidTenure(false)
+        setBaselineOutstanding('')
+        setOverrideEmi(false)
+        setCustomEmi('')
+        setNotes('Higher education overseas degree loan')
+        break
+      case 'clear':
+        setType(defaultType ?? 'home')
+        setLender('')
+        setPrincipal('')
+        setAnnualRate('')
+        setTenureMonths('')
+        setStartDate(new Date().toISOString().slice(0, 10))
+        setFirstEmiDate('')
+        setIsMidTenure(false)
+        setBaselineOutstanding('')
+        setOverrideEmi(false)
+        setCustomEmi('')
+        setNotes('')
+        break
+    }
+  }
 
   useEffect(() => {
-    if (open && defaultType) {
-      setType(defaultType)
+    if (open) {
+      if (scenario === 'worst') {
+        applyPreset('worst')
+      } else if (scenario === 'demo') {
+        applyPreset('demo')
+      } else if (defaultType) {
+        setType(defaultType)
+      }
     }
-  }, [open, defaultType])
+  }, [open, scenario, defaultType])
 
   const calculatedEmi = useMemo(() => {
     return computeEmiPreview(principal, annualRate, tenureMonths)
@@ -121,6 +209,62 @@ export function LoanFormDialog({ open, onOpenChange, defaultType }: LoanFormDial
           </DialogHeader>
 
           <div className="space-y-4 py-4">
+            {import.meta.env.DEV && (
+              <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-dashed border-primary/40 bg-primary/5 p-2.5 text-xs">
+                <div className="flex items-center gap-1.5 font-medium text-primary">
+                  <span className="inline-block size-2 rounded-full bg-primary" />
+                  <span>Break UI Presets:</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-1">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-6 px-2 text-[11px]"
+                    onClick={() => applyPreset('demo')}
+                  >
+                    Demo
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-6 px-2 text-[11px]"
+                    onClick={() => applyPreset('worst')}
+                  >
+                    Worst Case
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-6 px-2 text-[11px]"
+                    onClick={() => applyPreset('zero_rate')}
+                  >
+                    0% Rate
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-6 px-2 text-[11px]"
+                    onClick={() => applyPreset('unicode')}
+                  >
+                    Unicode
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 px-2 text-[11px] text-muted-foreground hover:text-foreground"
+                    onClick={() => applyPreset('clear')}
+                  >
+                    Clear
+                  </Button>
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label htmlFor="loan-type">Loan Type</Label>

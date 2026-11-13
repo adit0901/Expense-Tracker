@@ -19,6 +19,7 @@ import { cn } from '@/lib/utils'
 import type { LoanOut, LoanType } from '@/services/api/types'
 
 import { useDeleteLoan, useLoans, useLoanSummary } from './api'
+import { BreakUISelector } from './BreakUISelector'
 import { ConfirmPaymentDialog } from './ConfirmPaymentDialog'
 import { LoanFormDialog } from './LoanFormDialog'
 import { LoanScheduleModal } from './LoanScheduleModal'
@@ -382,6 +383,8 @@ export function LoansPage() {
         confirmLabel="Delete Loan"
         onConfirm={handleDelete}
       />
+
+      {import.meta.env.DEV && <BreakUISelector />}
     </div>
   )
 }
